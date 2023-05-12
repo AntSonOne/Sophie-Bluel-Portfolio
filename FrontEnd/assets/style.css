@@ -98,6 +98,12 @@ nav li {
 li:hover {
 	color: #B1663C;
 }
+
+nav li a {
+  text-decoration: none;
+  color: inherit;
+}
+
 #introduction {
 	display: flex;
 	align-items: center;
@@ -206,4 +212,34 @@ footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
+}
+
+/****************** LOGIN PAGE ******************/
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.login input {
+  width: 379px;
+  height: 51px;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+  border: none;
+  outline: none;
+}
+
+.login button {
+  padding: 9px 38px;
+  background-color: #1D6154;
+  font-size: 16px;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 25px;
+}
+
+.login a {
+  color: inherit;
 }
