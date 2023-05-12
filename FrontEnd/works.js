@@ -21,9 +21,37 @@ function genererWorks(works){
 
 genererWorks(works);
 
-const categoryResponse = await fetch("http://localhost:5678/api/categories");
-const category = await categoryResponse.json();
+const boutonTous = document.querySelector(".all");
 
-filter(function(category){
+boutonTous.addEventListener("click", function () {
+    const tousFiltered = works.filter(function (work) {
+      return work;
+    })
+   console.log(tousFiltered)
+});
 
+const boutonObjets = document.querySelector(".objects");
+
+boutonObjets.addEventListener("click", function () {
+    const objetsFiltered = works.filter(function (work) {
+      return work.category.name === "Objets";
+    })
+   console.log(objetsFiltered)
+});
+const boutonAppartements = document.querySelector(".appartements");
+
+boutonAppartements.addEventListener("click", function () {
+    const appartementsFiltered = works.filter(function (work) {
+      return work.category.name === "Appartements";
+    })
+   console.log(appartementsFiltered)
+});
+
+const boutonHotels = document.querySelector(".hotels");
+
+boutonHotels.addEventListener("click", function () {
+    const hotelsFiltered = works.filter(function (work) {
+      return work.category.name === "Hotels & restaurants";
+    })
+   console.log(hotelsFiltered)
 });
