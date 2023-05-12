@@ -123,8 +123,30 @@ li:hover {
 }
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
 }
+
+.filters {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  margin: 51px 0 51px;
+}
+
+.filters button {
+  padding: 9px 20px;
+  background-color: #FFFFFF;
+  font-size: 16px;
+  color: #1D6154;
+  border: 1px solid #1D6154;
+  border-radius: 25px;
+}
+
+.filters button:hover {
+  background-color: #1D6154;
+  color: #FFFFFF;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
@@ -185,4 +207,3 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
-
