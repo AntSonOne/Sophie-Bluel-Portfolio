@@ -17,7 +17,7 @@ function genererWorks(works){
     workElement.appendChild(imageElement);
     workElement.appendChild(titleElement);
   }
-}
+};
 
 genererWorks(works);
 
