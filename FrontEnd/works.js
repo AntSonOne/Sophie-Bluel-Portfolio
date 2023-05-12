@@ -59,3 +59,19 @@ boutonHotels.addEventListener("click", function () {
    document.querySelector(".gallery").innerHTML = "";
    genererWorks(hotelsFiltered);
 });
+
+// const buttons = document.querySelectorAll('.button-filter');
+
+// let value;
+// buttons.forEach((v) => {
+//   v.addEventListener('click', () => {
+//     value = works.filter((w) => {
+
+//       if(typeof w.category.name !== "undefined") {
+//         return w.category.name === v.dataset.name
+//       }
+
+//       return w;
+//     });
+//   });
+// });
