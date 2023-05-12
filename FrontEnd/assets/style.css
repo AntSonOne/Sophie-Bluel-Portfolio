@@ -216,10 +216,15 @@ footer nav ul {
 
 /****************** LOGIN PAGE ******************/
 
+.login h2 {
+  margin: 0 auto;
+}
+
 .login {
+  margin: 0 auto;
+  width: 30%;
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 30px;
 }
 
