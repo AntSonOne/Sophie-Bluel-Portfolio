@@ -20,3 +20,10 @@ function genererWorks(works){
 }
 
 genererWorks(works);
+
+const categoryResponse = await fetch("http://localhost:5678/api/categories");
+const category = await categoryResponse.json();
+
+filter(function(category){
+
+});
