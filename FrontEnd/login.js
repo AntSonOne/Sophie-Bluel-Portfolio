@@ -19,7 +19,7 @@ function ajoutListenerLogin() {
     if (reponse.status !== 200) {
       alert("Erreur dans l’identifiant ou le mot de passe");
     } else {
-      location.replace("index.html");
+      location.replace("user.html");
     }
   });
 };

@@ -16,23 +16,27 @@
     <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
     <nav>
       <ul>
-        <li><a href="index.html">projets</a></li>
+        <li><a href="user.html">projets</a></li>
         <li><a href="#contact"></a>contact</li>
-        <li><a href="login.html">login</a></li>
+        <li><a href="index.html">logout</a></li>
         <li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
       </ul>
     </nav>
   </header>
   <main>
-    <form class="login" action="login">
-      <h2>Log In</h2>
-      <label for="email">E-mail</label>
-      <input type="email" name="email" id="email">
-      <label for="password">Mot de passe</label>
-      <input type="password" name="password" id="password">
-      <button type="submit">Se connecter</button>
-      <a href="#">Mot de passe oublié</a>
-    </form>
+    <section id="contact">
+      <h2>Contact</h2>
+      <p>Vous avez un projet ? Discutons-en !</p>
+      <form action="#" method="post">
+        <label for="name">Nom</label>
+        <input type="text" name="name" id="name">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email">
+        <label for="message">Message</label>
+        <textarea name="message" id="message" cols="30" rows="10"></textarea>
+        <input type="submit" value="Envoyer">
+      </form>
+    </section>
   </main>
   <footer>
     <nav>
