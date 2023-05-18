@@ -1,6 +1,6 @@
 function ajoutListenerLogin() {
   const formulaireLogin = document.querySelector(".login");
-  formulaireLogin.addEventListener("submit", async function (event) {
+  formulaireLogin.addEventListener("submit", async function(event) {
   event.preventDefault();
 
     const login = {
@@ -14,13 +14,16 @@ function ajoutListenerLogin() {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: chargeUtile
+    })
+    .then(response => response.json())
+    .then(function(data){
+      const accessToken = data.token;
+      if (accessToken){
+        location.replace("user.html");
+      } else {
+        alert("Erreur dans l’identifiant ou le mot de passe");
+      }
     });
-
-    if (reponse.status !== 200) {
-      alert("Erreur dans l’identifiant ou le mot de passe");
-    } else {
-      location.replace("user.html");
-    }
   });
 };
 
