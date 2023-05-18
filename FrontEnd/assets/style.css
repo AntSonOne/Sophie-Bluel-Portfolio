@@ -22,6 +22,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	scroll-behavior: smooth;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure,
@@ -216,35 +217,47 @@ footer nav ul {
 
 /****************** LOGIN PAGE ******************/
 
-.login h2 {
-  margin: 0 auto;
+#login h2 {
+	text-align: center;
+	margin: 37px;
 }
-
 .login {
-  margin: 0 auto;
-  width: 30%;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
+	margin: 0 auto;
+	width: 30%;
+	display: flex;
+	flex-direction: column;
+	gap: 30px
 }
 
 .login input {
-  font-size:  16px;
-  padding: 16px;
-  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-  border: none;
-  outline: none;
-}
-
-.login button {
-  padding: 9px 38px;
-  background-color: #1D6154;
-  font-size: 16px;
-  color: #FFFFFF;
-  border: none;
-  border-radius: 25px;
+	font-size:  16px;
+	padding: 16px;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	outline: none;
 }
 
 .login a {
-  color: inherit;
+	color: inherit;
+	margin: 0 auto;
+}
+
+.admin {
+	padding: 10px;
+	background-color: black;
+	color: #FFFFFF;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.admin span {
+	margin: 0 20px 0 9px;
+}
+
+.admin button {
+	background-color: #FFFFFF;
+	padding: 11px 23px;
+	border: none;
+	border-radius: 50px;
 }
