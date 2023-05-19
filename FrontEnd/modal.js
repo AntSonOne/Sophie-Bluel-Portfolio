@@ -29,7 +29,7 @@ const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
 
-function genererWorksModale(works){
+function genererWorksModal(works){
   for (let i = 0; i < works.length; i++) {
 
     const article = works[i]
@@ -38,13 +38,13 @@ function genererWorksModale(works){
     workElement.dataset.id = works[i].id;
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
-    const titleElement = document.createElement("figcaption");
-    titleElement.innerText = article.title;
+    const buttonElement = document.createElement("button");
+    buttonElement.innerText = "éditer";
 
     sectionGallery.appendChild(workElement);
     workElement.appendChild(imageElement);
-    workElement.appendChild(titleElement);
+    workElement.appendChild(buttonElement);
   }
 };
 
-genererWorksModale(works);
+genererWorksModal(works);

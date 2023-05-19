@@ -21,17 +21,12 @@ header, main, footer {
     margin-bottom: 38px;
 }
 
-.admin a {
+.js-modal {
 	color: #FFFFFF;
 	text-decoration: none;
 	margin: 0 20px 0 9px;
 }
 
-.close {
-	margin: 2em;
-	border: none;
-	box-shadow: rgba(0, 0, 0, 0.3);
-}
 
 .add-pictures{
 	padding: 9px 20px;
@@ -64,6 +59,9 @@ header, main, footer {
 }
 
 .modal-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
 	overflow: auto;
 	padding: 1em;
 	width: 50%;
@@ -73,19 +71,30 @@ header, main, footer {
 	color: black;
 }
 
-.modal-wrapper {
+.close {
+	border: none;
+	margin: 0;
+	align-self: self-end;
+}
+
+.modal-wrapper h1, .add-pictures{
+	margin: 0 auto;
+}
+
+.modal-wrapper a {
+	margin: 0 auto;
+	text-decoration: none;
 	color: black;
 }
 
 .modal-gallery {
 	width: 100%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
 }
 
 .modal-gallery img {
 	width: 100%;
-
 }
