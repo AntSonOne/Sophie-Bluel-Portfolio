@@ -24,3 +24,27 @@ const closeModal = function(event){
 document.querySelectorAll('.js-modal').forEach( a => {
     a.addEventListener("click", openModal)
 });
+
+const reponse = await fetch("http://localhost:5678/api/works");
+const works = await reponse.json();
+
+
+function genererWorksModal(works){
+  for (let i = 0; i < works.length; i++) {
+
+    const article = works[i]
+    const sectionGallery = document.querySelector(".modal-gallery");
+    const workElement = document.createElement("figure");
+    workElement.dataset.id = works[i].id;
+    const imageElement = document.createElement("img");
+    imageElement.src = article.imageUrl;
+    const buttonElement = document.createElement("button");
+    buttonElement.innerText = "éditer";
+
+    sectionGallery.appendChild(workElement);
+    workElement.appendChild(imageElement);
+    workElement.appendChild(buttonElement);
+  }
+};
+
+genererWorksModal(works);

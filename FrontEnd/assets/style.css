@@ -168,7 +168,7 @@ nav li a {
 }
 #contact {
 	width: 50%;
-margin: auto;
+	margin: auto;
 }
 #contact > * {
 	text-align: center;
@@ -240,45 +240,4 @@ footer nav ul {
 .login a {
 	color: inherit;
 	margin: 0 auto;
-}
-
-.admin {
-	padding: 10px;
-	background-color: black;
-	color: #FFFFFF;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.admin span {
-	margin: 0 20px 0 9px;
-}
-
-.admin button {
-	background-color: #FFFFFF;
-	padding: 11px 23px;
-	border: none;
-	border-radius: 50px;
-}
-
-.modal	{
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background: rgba(0, 0, 0, 0.8);
-}
-
-.modal-wrapper {
-	overflow: auto;
-	padding: 1em;
-	width: 50%;
-	height: 70%;
-	max-width: calc(100vw - 20px);
-	background-color: #FFFFFF;
 }

@@ -1,6 +1,7 @@
 const reponse = await fetch("http://localhost:5678/api/works");
 const works = await reponse.json();
 
+
 function genererWorks(works){
   for (let i = 0; i < works.length; i++) {
 

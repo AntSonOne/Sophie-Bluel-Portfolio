@@ -9,16 +9,26 @@
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
 	<link rel="stylesheet" href="./assets/style.css">
+	<link rel="stylesheet" href="./assets/modale.css">
   <script type="module" src="login.js"></script>
   <script type="module" src="works.js"></script>
   <script type="module" src="modal.js"></script>
 </head>
 <body>
   <div class="admin">
-    <img src="/FrontEnd/assets/icons/icon-pen.svg">
-    <span>Mode édition</span>
-    <button>publier les changements</button>
+    <img src="./assets/icons/icon-pen.svg">
+    <a href="#modal" class="js-modal">Mode édition</a>
+    <button class="publish-changes">publier les changements</button>
   </div>
+  <aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
+    <div class="modal-wrapper" >
+      <button class="close">x</button>
+      <h1>Galerie photo</h1>
+      <div class="modal-gallery"></div>
+      <button class="add-pictures">Ajouter une photo</button>
+      <a href="#">Supprimer la galerie</a>
+    </div>
+  </aside>
   <header>
     <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
     <nav>
@@ -31,16 +41,6 @@
     </nav>
   </header>
   <main>
-    <a href="#modal" class="js-modal">Ouvrir la modale</a>
-    <aside id="modal" class="modal" aria-hidden="true" role="dialog" aria-modal="false" style="display: none;">
-      <div class="modal-wrapper" >
-        <button>X</button>
-        <h1>Galerie photo</h1>
-        <p>Vous savez, moi je ne crois pas qu’il y ait de bonne ou de mauvaise situation. Moi, si je devais résumer ma vie aujourd’hui avec vous, je dirais que c’est d’abord des rencontres. Des gens qui m’ont tendu la main, peut-être à un moment où je ne pouvais pas, où j’étais seul chez moi. Et c’est assez curieux de se dire que les hasards, les rencontres forgent une destinée… Parce que quand on a le goût de la chose, quand on a le goût de la chose bien faite, le beau geste, parfois on ne trouve pas l’interlocuteur en face je dirais, le miroir qui vous aide à avancer. Alors ça n’est pas mon cas, comme je disais là, puisque moi au contraire, j’ai pu : et je dis merci à la vie, je lui dis merci, je chante la vie, je danse la vie… je ne suis qu’amour ! Et finalement, quand beaucoup de gens aujourd’hui me disent « Mais comment fais-tu pour avoir cette humanité ? », et bien je leur réponds très simplement, je leur dis que c’est ce goût de l’amour ce goût donc qui m’a poussé aujourd’hui à entreprendre une construction mécanique, mais demain qui sait ? Peut-être simplement à me mettre au service de la communauté, à faire le don, le don de soi… </p>
-        <button>Ajouter une photo</button>
-        <a href="#">Supprimer la galerie</a>
-      </div>
-    </aside>
     <section id="introduction">
       <figure>
         <img src="./assets/images/sophie-bluel.png" alt="">
