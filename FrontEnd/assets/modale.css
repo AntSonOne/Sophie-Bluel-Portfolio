@@ -73,18 +73,24 @@ header, main, footer {
 
 .close {
 	border: none;
+	background: none;
 	margin: 0;
 	align-self: self-end;
 }
 
-.modal-wrapper h1, .add-pictures{
+.close:hover {
+	border-radius: 5px;
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.modal-wrapper h2, .add-pictures{
 	margin: 0 auto;
 }
 
 .modal-wrapper a {
 	margin: 0 auto;
 	text-decoration: none;
-	color: black;
+	color: #D65353;
 }
 
 .modal-gallery {

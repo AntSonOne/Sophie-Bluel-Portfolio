@@ -8,7 +8,9 @@ const openModal = function(event){
     target.removeAttribute('aria-hidden');
     target.setAttribute('aria-modal', true);
     modal = target;
-    modal.addEventListener('click', closeModal)
+    modal.addEventListener('click', closeModal);
+    modal.querySelector('.close').addEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').addEventListener('click', stopPropagation)
 }
 
 const closeModal = function(event){
@@ -17,12 +19,24 @@ const closeModal = function(event){
     modal.style.display = 'none';
     target.setAttribute('aria-hidden', true);
     target.removeAttribute('aria-modal');
-    modal.removeEventListener('click', closeModal)
+    modal.removeEventListener('click', closeModal);
+    modal.querySelector('.close').removeEventListener('click', closeModal);
+    modal.querySelector('.js-modal-stop').removeEventListener('click', stopPropagation)
     modal = null;
+}
+
+const stopPropagation = function(event){
+    event.stopPropagation();
 }
 
 document.querySelectorAll('.js-modal').forEach( a => {
     a.addEventListener("click", openModal)
+});
+
+window.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' || event.key === 'Esc') {
+        closeModal(event)
+    }
 });
 
 const reponse = await fetch("http://localhost:5678/api/works");
