@@ -21,7 +21,6 @@ const openModal = function (event) {
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
   let body = document.querySelector("body");
-  console.log("lloº ", body);
   body.style.overflow = "hidden";
 };
 
@@ -68,9 +67,9 @@ window.addEventListener("keydown", function (event) {
   }
 });
 
-const deleteWork = function (event) {
-  event.preventDefault();
+/*********************** DELETE A WORK *******************/
 
+const deleteWork = function (event) {
   const id = event.target.dataset.id;
 
   {
@@ -79,11 +78,22 @@ const deleteWork = function (event) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
+    })
+      .then(window.preventDefault())
+      .then((Response) => {
+        console.log("respponse");
+        if (Response.ok) {
+          window.preventDefault();
+          genererWorksModal(works);
+          console.log("generate");
+        }
+      });
   }
 };
 
 function genererWorksModal(works) {
+  document.querySelector(".modal-gallery").innerHTML = "";
+
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
     const sectionGallery = document.querySelector(".modal-gallery");
