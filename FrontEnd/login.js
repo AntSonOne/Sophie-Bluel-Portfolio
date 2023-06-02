@@ -23,7 +23,7 @@ function ajoutListenerLogin() {
         const accessToken = data.token;
         if (accessToken && accessToken.length === TOKENLENGTH) {
           window.localStorage.setItem("token", accessToken);
-          location.replace("user.html");
+          location.replace("index.html");
         } else {
           alert("Erreur dans l’identifiant ou le mot de passe");
         }
@@ -33,10 +33,8 @@ function ajoutListenerLogin() {
 
 ajoutListenerLogin();
 
-console.log(TOKEN.length, TOKENLENGTH);
-
 if (
-  window.location.pathname.includes("user.html") &&
+  window.location.pathname.includes("index.html") &&
   TOKEN.length !== TOKENLENGTH
 ) {
   location.replace("index.html");
