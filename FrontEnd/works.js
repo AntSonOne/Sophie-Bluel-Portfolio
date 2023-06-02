@@ -61,12 +61,6 @@ if (!token) {
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(hotelsFiltered);
   });
-
-  let loginNav = document.querySelector(".admin");
-  loginNav.style.display = null;
-
-  let logoutNav = document.querySelector(".admin");
-  logoutNav.style.display = "none";
 }
 
 if (token) {
@@ -84,7 +78,7 @@ if (token) {
 
   let logoutNav = document.querySelector(".logout");
   logoutNav.style.display = null;
-  logoutNav.addEventListener("click", (token = null));
+  // logoutNav.addEventListener("click", localStorage.setItem((token = "null")));
 }
 
 // const buttons = document.querySelectorAll('.button-filter');
