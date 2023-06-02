@@ -1,6 +1,11 @@
-let modal = null;
+let works = null;
+const worksResponse = await fetch("http://localhost:5678/api/works");
+works = await worksResponse.json();
+
+const token = localStorage.getItem("token");
 const focusableSelector = "button, a, input, textarea";
 let focusables = [];
+// const deleteButton = document.querySelectorAll(".modal-gallery figure button");
 
 const openModal = function (event) {
   event.preventDefault();
@@ -58,8 +63,20 @@ window.addEventListener("keydown", function (event) {
   }
 });
 
-const reponse = await fetch("http://localhost:5678/api/works");
-const works = await reponse.json();
+const deleteWork = function (event) {
+  event.preventDefault();
+
+  const id = event.target.dataset.id;
+
+  {
+    fetch(`http://localhost:5678/api/works/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  }
+};
 
 function genererWorksModal(works) {
   for (let i = 0; i < works.length; i++) {
@@ -75,6 +92,7 @@ function genererWorksModal(works) {
     deleteElement.classList.add("js-delete");
     deleteElement.dataset.id = works[i].id;
     deleteElement.innerText = "supprimer";
+    deleteElement.addEventListener("click", deleteWork);
 
     sectionGallery.appendChild(workElement);
     workElement.appendChild(imageElement);
@@ -84,28 +102,3 @@ function genererWorksModal(works) {
 }
 
 genererWorksModal(works);
-
-const token = localStorage.getItem("token");
-
-function ajoutListenerDelete() {
-  const deleteButton = document.querySelectorAll(
-    ".modal-gallery figure button"
-  );
-
-  for (let i = 0; i < deleteButton.length; i++) {
-    deleteButton[i].addEventListener("click", async function (event) {
-      event.preventDefault();
-
-      const id = event.target.dataset.id;
-
-      const reponse = await fetch(`http://localhost:5678/api/works/${id}`, {
-        method: "DELETE",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-    });
-  }
-}
-
-ajoutListenerDelete();
