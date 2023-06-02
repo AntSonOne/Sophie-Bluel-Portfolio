@@ -73,6 +73,9 @@ if (token) {
   let filters = document.querySelector(".filters");
   filters.style.display = "none";
 
+  let modifierButton = document.querySelector(".js-modal");
+  modifierButton.style.display = null;
+
   let adminNav = document.querySelector(".admin");
   adminNav.style.display = null;
 
