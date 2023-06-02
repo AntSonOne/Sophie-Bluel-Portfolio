@@ -20,12 +20,16 @@ const openModal = function (event) {
   modal
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
+  let body = document.querySelector("body");
+  body.style.overflow = "hidden";
 };
 
 const closeModal = function (event) {
   if (modal === null) return;
   event.preventDefault();
   modal.style.display = "none";
+  let body = document.querySelector("body");
+  body.style.overflow = null;
   modal.setAttribute("aria-hidden", true);
   modal.removeAttribute("aria-modal");
   modal.removeEventListener("click", closeModal);
@@ -63,9 +67,9 @@ window.addEventListener("keydown", function (event) {
   }
 });
 
-const deleteWork = function (event) {
-  event.preventDefault();
+/*********************** DELETE A WORK *******************/
 
+const deleteWork = function (event) {
   const id = event.target.dataset.id;
 
   {
@@ -74,11 +78,22 @@ const deleteWork = function (event) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    });
+    })
+      .then(window.preventDefault())
+      .then((Response) => {
+        console.log("respponse");
+        if (Response.ok) {
+          window.preventDefault();
+          genererWorksModal(works);
+          console.log("generate");
+        }
+      });
   }
 };
 
 function genererWorksModal(works) {
+  document.querySelector(".modal-gallery").innerHTML = "";
+
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
     const sectionGallery = document.querySelector(".modal-gallery");
@@ -102,3 +117,47 @@ function genererWorksModal(works) {
 }
 
 genererWorksModal(works);
+
+/*********************** ADD A NEW WORK *******************/
+
+const addPics = document.querySelector(".add-pictures");
+
+addPics.addEventListener("click", function () {
+  document.querySelector(".modal-gallery").innerHTML = "";
+  modalForm();
+  document.querySelector(".add-pictures").style.display = "none";
+  document.querySelector(".validate").style.display = null;
+});
+
+function modalForm() {
+  const sectionGallery = document.querySelector(".modal-gallery");
+  const formElement = document.createElement("form");
+
+  const inputImage = document.createElement("input");
+  inputImage.type = "file";
+
+  const captionElement = document.createElement("label");
+  captionElement.innerText = "Titre";
+  const titleElement = document.createElement("input");
+  titleElement.type = "text";
+  const labelElement = document.createElement("label");
+  labelElement.innerText = "Catégorie";
+  const categoryElement = document.createElement("input");
+  categoryElement.type = "dropdown";
+
+  sectionGallery.appendChild(formElement);
+  formElement.appendChild(inputImage);
+  formElement.appendChild(captionElement);
+  formElement.appendChild(titleElement);
+  formElement.appendChild(labelElement);
+  formElement.appendChild(categoryElement);
+}
+// const boutonObjets = document.querySelector(".objects");
+
+// boutonObjets.addEventListener("click", function () {
+//   const objetsFiltered = works.filter(function (work) {
+//     return work.category.name === "Objets";
+//   });
+//   document.querySelector(".gallery").innerHTML = "";
+//   genererWorks(objetsFiltered);
+// });
