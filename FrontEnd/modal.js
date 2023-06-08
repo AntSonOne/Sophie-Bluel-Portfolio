@@ -81,11 +81,9 @@ const deleteWork = function (event) {
     })
       .then(window.preventDefault())
       .then((Response) => {
-        console.log("respponse");
         if (Response.ok) {
           window.preventDefault();
           genererWorksModal(works);
-          console.log("generate");
         }
       });
   }
