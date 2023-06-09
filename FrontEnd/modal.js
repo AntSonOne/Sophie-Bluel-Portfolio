@@ -78,16 +78,12 @@ const deleteWork = function (event) {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-      .then(window.preventDefault())
-      .then((Response) => {
-        console.log("respponse");
-        if (Response.ok) {
-          window.preventDefault();
-          genererWorksModal(works);
-          console.log("generate");
-        }
-      });
+    }).then((Response) => {
+      if (Response.ok) {
+        works = works.filter((w) => w.id != id);
+        genererWorksModal(works);
+      }
+    });
   }
 };
 
