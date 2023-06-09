@@ -10,6 +10,10 @@ const CATEGORIES = await fetch("http://localhost:5678/api/categories").then(
   (r) => r.json()
 );
 
+for (let category of CATEGORIES) {
+  console.log(category);
+}
+
 const openModal = function (event) {
   event.preventDefault();
   modal = document.querySelector(event.target.getAttribute("href"));
@@ -178,5 +182,27 @@ addPics.addEventListener("click", function () {
 });
 
 const addNewWork = function (event) {
-  console.log("event ", event);
+  let fd = new FormData();
+  fd.append("image", "image");
+  fd.append("title", "tier");
+  fd.append("category", "cat");
+
+  console.log("event ", Array.from(fd));
+
+  for (let obj of fd) {
+    console.log(obj);
+  }
+
+  fetch("http://localhost:5678/api/users/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: fd,
+  })
+    .then((response) => {
+      response.json(), console.log("response ", response);
+    })
+    .then((data) => {
+      data, console.log("data ", data);
+    })
+    .catch((err) => console.error("Erreur : " + err));
 };
