@@ -2,10 +2,13 @@ let works = null;
 const worksResponse = await fetch("http://localhost:5678/api/works");
 works = await worksResponse.json();
 
-const token = localStorage.getItem("token");
+const TOKEN = localStorage.getItem("token");
 const focusableSelector = "button, a, input, textarea";
 let focusables = [];
-// const deleteButton = document.querySelectorAll(".modal-gallery figure button");
+
+const CATEGORIES = await fetch("http://localhost:5678/api/categories").then(
+  (r) => r.json()
+);
 
 const openModal = function (event) {
   event.preventDefault();
@@ -76,7 +79,7 @@ const deleteWork = function (event) {
     fetch(`http://localhost:5678/api/works/${id}`, {
       method: "DELETE",
       headers: {
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${TOKEN}`,
       },
     }).then((Response) => {
       if (Response.ok) {
@@ -93,6 +96,7 @@ function genererWorksModal(works) {
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
     const sectionGallery = document.querySelector(".modal-gallery");
+
     const workElement = document.createElement("figure");
     workElement.dataset.id = works[i].id;
     const imageElement = document.createElement("img");
@@ -106,6 +110,7 @@ function genererWorksModal(works) {
     deleteElement.addEventListener("click", deleteWork);
 
     sectionGallery.appendChild(workElement);
+
     workElement.appendChild(imageElement);
     workElement.appendChild(buttonElement);
     workElement.appendChild(deleteElement);
@@ -116,44 +121,62 @@ genererWorksModal(works);
 
 /*********************** ADD A NEW WORK *******************/
 
+// creation du form d'ajout d'un projet dans la modale
+
+function modalForm() {
+  document.querySelector(".modal-wrapper").innerHTML = "";
+  const sectionGallery = document.querySelector(".modal-wrapper");
+
+  const container = document.createElement("div");
+  container.classList.add("container");
+
+  const titleFormModal = document.createElement("h2");
+  titleFormModal.innerText = "Ajout photo";
+
+  const formElement = document.createElement("form");
+  formElement.classList.add("row");
+
+  const inputImage = document.createElement("input");
+  inputImage.type = "file";
+  inputImage.name = "file";
+
+  const labelTitleElement = document.createElement("label");
+  labelTitleElement.innerText = "Titre";
+  labelTitleElement.name = "title";
+  const titleElement = document.createElement("input");
+  titleElement.type = "text";
+
+  const labelElement = document.createElement("label");
+  labelElement.innerText = "Catégorie";
+  const categoryElement = document.createElement("input");
+  categoryElement.type = "dropdown";
+  categoryElement.name = "number";
+  const validateButton = document.createElement("button");
+  validateButton.classList.add("validate");
+  validateButton.innerText = "valider";
+  validateButton.addEventListener("click", addNewWork());
+
+  sectionGallery.appendChild(titleFormModal);
+  sectionGallery.appendChild(container);
+  container.appendChild(formElement);
+  formElement.appendChild(inputImage);
+  formElement.appendChild(labelTitleElement);
+  formElement.appendChild(titleElement);
+  formElement.appendChild(labelElement);
+  formElement.appendChild(categoryElement);
+  formElement.appendChild(validateButton);
+}
+
+/* au click sur "ajouter une photo" */
+
 const addPics = document.querySelector(".add-pictures");
 
 addPics.addEventListener("click", function () {
-  document.querySelector(".modal-gallery").innerHTML = "";
   modalForm();
   document.querySelector(".add-pictures").style.display = "none";
   document.querySelector(".validate").style.display = null;
 });
 
-function modalForm() {
-  const sectionGallery = document.querySelector(".modal-gallery");
-  const formElement = document.createElement("form");
-
-  const inputImage = document.createElement("input");
-  inputImage.type = "file";
-
-  const captionElement = document.createElement("label");
-  captionElement.innerText = "Titre";
-  const titleElement = document.createElement("input");
-  titleElement.type = "text";
-  const labelElement = document.createElement("label");
-  labelElement.innerText = "Catégorie";
-  const categoryElement = document.createElement("input");
-  categoryElement.type = "dropdown";
-
-  sectionGallery.appendChild(formElement);
-  formElement.appendChild(inputImage);
-  formElement.appendChild(captionElement);
-  formElement.appendChild(titleElement);
-  formElement.appendChild(labelElement);
-  formElement.appendChild(categoryElement);
-}
-// const boutonObjets = document.querySelector(".objects");
-
-// boutonObjets.addEventListener("click", function () {
-//   const objetsFiltered = works.filter(function (work) {
-//     return work.category.name === "Objets";
-//   });
-//   document.querySelector(".gallery").innerHTML = "";
-//   genererWorks(objetsFiltered);
-// });
+const addNewWork = function (event) {
+  console.log("event ", event);
+};

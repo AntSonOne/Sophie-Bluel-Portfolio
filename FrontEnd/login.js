@@ -1,7 +1,7 @@
 const TOKEN = window.localStorage.getItem("token");
 const TOKENLENGTH = 143;
 
-function ajoutListenerLogin() {
+const login = function () {
   const formulaireLogin = document.querySelector(".login");
   formulaireLogin.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -13,7 +13,7 @@ function ajoutListenerLogin() {
 
     const chargeUtile = JSON.stringify(login);
 
-    const reponse = await fetch("http://localhost:5678/api/users/login", {
+    await fetch("http://localhost:5678/api/users/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: chargeUtile,
@@ -29,9 +29,9 @@ function ajoutListenerLogin() {
         }
       });
   });
-}
+};
 
-ajoutListenerLogin();
+login();
 
 if (
   window.location.pathname.includes("index.html") &&
