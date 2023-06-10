@@ -10,9 +10,7 @@ const CATEGORIES = await fetch("http://localhost:5678/api/categories").then(
   (r) => r.json()
 );
 
-for (let category of CATEGORIES) {
-  console.log(category);
-}
+const IDS = CATEGORIES.map((c) => c.id);
 
 const openModal = function (event) {
   event.preventDefault();
@@ -137,28 +135,52 @@ function modalForm() {
   const titleFormModal = document.createElement("h2");
   titleFormModal.innerText = "Ajout photo";
 
+  // FORM
+
   const formElement = document.createElement("form");
   formElement.classList.add("row");
+
+  //image element
 
   const inputImage = document.createElement("input");
   inputImage.type = "file";
   inputImage.name = "file";
+  inputImage.accept = "multipart/form-data";
+  inputImage.dataset.image = "image";
+
+  // title element
 
   const labelTitleElement = document.createElement("label");
   labelTitleElement.innerText = "Titre";
   labelTitleElement.name = "title";
   const titleElement = document.createElement("input");
   titleElement.type = "text";
+  titleElement.dataset.title = "title";
 
+  // catégorie element
   const labelElement = document.createElement("label");
   labelElement.innerText = "Catégorie";
-  const categoryElement = document.createElement("input");
-  categoryElement.type = "dropdown";
-  categoryElement.name = "number";
+  const categoryElement = document.createElement("select");
+  categoryElement.name = "categories";
+  const option1 = document.createElement("option");
+  option1.value = IDS[0];
+  option1.innerText = "Objets";
+  inputImage.dataset.category = "category";
+
+  const option2 = document.createElement("option");
+  option2.value = IDS[1];
+  option2.innerText = "Appartements";
+  inputImage.dataset.category = "category";
+
+  const option3 = document.createElement("option");
+  option3.value = IDS[2];
+  option3.innerText = "Hotels & restaurants";
+  inputImage.dataset.category = "category";
+
   const validateButton = document.createElement("button");
   validateButton.classList.add("validate");
   validateButton.innerText = "valider";
-  validateButton.addEventListener("click", addNewWork());
+  validateButton.addEventListener("click", addNewWork);
 
   sectionGallery.appendChild(titleFormModal);
   sectionGallery.appendChild(container);
@@ -168,6 +190,9 @@ function modalForm() {
   formElement.appendChild(titleElement);
   formElement.appendChild(labelElement);
   formElement.appendChild(categoryElement);
+  categoryElement.appendChild(option1);
+  categoryElement.appendChild(option2);
+  categoryElement.appendChild(option3);
   formElement.appendChild(validateButton);
 }
 
@@ -181,28 +206,40 @@ addPics.addEventListener("click", function () {
   document.querySelector(".validate").style.display = null;
 });
 
-const addNewWork = function (event) {
-  let fd = new FormData();
-  fd.append("image", "image");
-  fd.append("title", "tier");
-  fd.append("category", "cat");
+const addNewWork = function () {
+  var formElement = document.querySelector("form");
+  var formData = new FormData(formElement);
 
-  console.log("event ", Array.from(fd));
+  // let fd = new FormData();
 
-  for (let obj of fd) {
-    console.log(obj);
-  }
+  // fd.append("title", title);
+  // fd.append("category", category);
 
-  fetch("http://localhost:5678/api/users/login", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: fd,
-  })
-    .then((response) => {
-      response.json(), console.log("response ", response);
-    })
-    .then((data) => {
-      data, console.log("data ", data);
-    })
-    .catch((err) => console.error("Erreur : " + err));
+  // var blob = new Blob([image], { image: image });
+
+  // fd.append("webmasterfile", blob);
+
+  var request = new XMLHttpRequest();
+
+  request.open("POST", "http://localhost:5678/api/works");
+  request
+    .send(formData)
+    .then((response) => console.log("resp ", response))
+    .catch((err) => console.error("Error : " + err));
+  // console.log("event ", Array.from(fd));
+  // for (let obj of fd) {
+  //   console.log(obj);
+  // }
+  // fetch("http://localhost:5678/api/works", {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: fd,
+  // })
+  //   .then((response) => {
+  //     response.json(), console.log("response ", response);
+  //   })
+  //   .then((data) => {
+  //     data, console.log("data ", data);
+  //   })
+  //   .catch((err) => console.error("Erreur : " + err));
 };
