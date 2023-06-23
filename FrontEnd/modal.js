@@ -1,6 +1,7 @@
 /*********************** GET TOKEN *******************/
 
 const TOKEN = localStorage.getItem("token");
+console.log("tok", TOKEN);
 
 /*********************** GET WORKS *******************/
 
@@ -89,19 +90,17 @@ window.addEventListener("keydown", function (event) {
 const deleteWork = function (event) {
   const id = event.target.dataset.id;
 
-  {
-    fetch(`http://localhost:5678/api/works/${id}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${TOKEN}`,
-      },
-    }).then((Response) => {
-      if (Response.ok) {
-        works = works.filter((w) => w.id != id);
-        genererWorksModal(works);
-      }
-    });
-  }
+  fetch(`http://localhost:5678/api/works/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  }).then((Response) => {
+    if (Response.ok) {
+      works = works.filter((w) => w.id != id);
+      genererWorksModal(works);
+    }
+  });
 };
 
 /*********************** GENERATE MODAL WORKS *******************/
@@ -155,13 +154,15 @@ function modalForm() {
   const inputImage = document.createElement("input");
   inputImage.type = "file";
   inputImage.name = "image";
-  inputImage.accept = "multipart/form-data";
   inputImage.dataset.image = "image";
 
   // TITLE ELEMENT
 
+  //label
   const labelTitleElement = document.createElement("label");
   labelTitleElement.innerText = "Titre";
+
+  //input
   const titleElement = document.createElement("input");
   titleElement.name = "title";
   titleElement.type = "text";
@@ -169,10 +170,13 @@ function modalForm() {
 
   // CATEGORY ELEMENT
 
+  //label
   const labelElement = document.createElement("label");
   labelElement.innerText = "Catégorie";
+
+  //dropdown
   const categoryElement = document.createElement("select");
-  categoryElement.name = "categories";
+  categoryElement.name = "category";
   const option1 = document.createElement("option");
   option1.value = categoriesIds[0];
   option1.innerText = "Objets";
@@ -188,8 +192,11 @@ function modalForm() {
   option3.innerText = "Hotels & restaurants";
   inputImage.dataset.category = "category";
 
+  // BUTTON ELEMENT
+
   const validateButton = document.createElement("button");
   validateButton.classList.add("validate");
+  validateButton.type = "submit";
   validateButton.innerText = "valider";
   validateButton.addEventListener("click", addNewWork);
 
@@ -220,18 +227,27 @@ ADDPICS.addEventListener("click", () => {
 /*********************** ADD A NEW WORK *******************/
 
 const addNewWork = () => {
-  formData = new FormData();
+  let image = document.getElementsByName("image");
+  let title = document.getElementsByName("title");
+  let category = document.getElementsByName("category");
 
+  let formData = new FormData();
+  formData.append("image", image);
+  formData.append("title", title);
+  formData.append("category", category);
+
+  console.log("form", formData);
   fetch("http://localhost:5678/api/works", {
     method: "POST",
     headers: {
+      Enctype: "multipart/form-data",
       Authorization: `Bearer ${TOKEN}`,
+      Accept: "application/json",
     },
-    body: FORMDATA,
+    body: formData,
   }).then((Response) => {
     if (Response.ok) {
-      works = works.filter((w) => w.id != id);
-      genererWorksModal(works);
+      console.log("works", works);
     }
   });
 };
