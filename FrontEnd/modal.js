@@ -227,22 +227,22 @@ ADDPICS.addEventListener("click", () => {
 /*********************** ADD A NEW WORK *******************/
 
 const addNewWork = () => {
-  let image = document.getElementsByName("image");
-  let title = document.getElementsByName("title");
-  let category = document.getElementsByName("category");
+  let image = document.getElementsByName("image")[0];
+  let title = document.getElementsByName("title")[0];
+  let category = document.getElementsByName("category")[0];
 
   let formData = new FormData();
-  formData.append("image", image);
-  formData.append("title", title);
-  formData.append("category", category);
+  formData.append("image", image.files[0].name);
+  formData.append("title", title.value);
+  formData.append("category", category.value);
 
   console.log("form", formData);
   fetch("http://localhost:5678/api/works", {
     method: "POST",
+
     headers: {
-      Enctype: "multipart/form-data",
       Authorization: `Bearer ${TOKEN}`,
-      Accept: "application/json",
+      "Content-Type": "multipart/form-data",
     },
     body: formData,
   }).then((Response) => {
