@@ -66,6 +66,7 @@ const openModal = (event) => {
 };
 
 const closeModal = (event) => {
+  genererWorksModal(works);
   if (modal === null) return;
   event.preventDefault();
   modal.style.display = "none";
@@ -169,6 +170,11 @@ if (!TOKEN) {
   });
 }
 
+let logoutNav = document.querySelector(".logout");
+const removeToken = () => {
+  localStorage.removeItem("token");
+};
+
 if (TOKEN) {
   let filters = document.querySelector(".filters");
   filters.style.display = "none";
@@ -182,19 +188,15 @@ if (TOKEN) {
   let loginNav = document.querySelector(".login");
   loginNav.style.display = "none";
 
-  let logoutNav = document.querySelector(".logout");
   logoutNav.style.display = null;
   logoutNav.addEventListener("click", removeToken);
 }
-
-const removeToken = () => {
-  localStorage.removeItem("token");
-};
 
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
   document.querySelector(".modal-gallery").innerHTML = "";
+  document.querySelector(".modal-form").innerHTML = "";
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
@@ -223,14 +225,16 @@ function genererWorksModal(works) {
 /*********************** ADD NEW WORK FORM *******************/
 
 function modalForm() {
-  document.querySelector(".modal-wrapper").innerHTML = "";
-  const sectionGallery = document.querySelector(".modal-wrapper");
+  document.querySelector(".modal-gallery").innerHTML = "";
+  document.querySelector(".gallery-title").innerHTML = "";
 
-  const container = document.createElement("div");
-  container.classList.add("container");
+  const sectionGallery = document.querySelector(".modal-form");
 
   const titleFormModal = document.createElement("h2");
   titleFormModal.innerText = "Ajout photo";
+
+  const container = document.createElement("div");
+  container.classList.add("container");
 
   // FORM
 
