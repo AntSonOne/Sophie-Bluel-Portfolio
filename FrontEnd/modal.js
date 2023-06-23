@@ -221,26 +221,37 @@ ADDPICS.addEventListener("click", () => {
 /*********************** ADD A NEW WORK *******************/
 
 const addNewWork = () => {
-  let image = document.getElementsByName("image")[0];
-  let title = document.getElementsByName("title")[0];
-  let category = document.getElementsByName("category")[0];
+  // let image = document.getElementsByName("image")[0].files[0];
+  // const blob = new File([image], { type: "multipart/form-data" });
+  // let title = document.getElementsByName("title")[0];
+  // let category = document.getElementsByName("category")[0];
 
-  const FORMDATA = new FormData();
-  FORMDATA.append("image", image.files[0].name);
-  FORMDATA.append("title", title.value);
-  FORMDATA.append("category", category.value);
+  // const FORMDATA = new FormData();
+  // FORMDATA.append("image", blob);
+  // FORMDATA.append("title", title.value);
+  // FORMDATA.append("category", category.value);
 
-  console.log("form", FORMDATA);
+  const formElement = document.querySelector("form");
+  const formData = new FormData(formElement);
+  // formElement.method = "post";
+  // formElement.enctype = "multipart/form-data";
+  // const request = new XMLHttpRequest();
+  // request.open("POST", "http://localhost:5678/api/works");
+  // request.send(formData);
+
+  console.log("form", formData);
+
   fetch("http://localhost:5678/api/works", {
     method: "POST",
     headers: {
+      accept: "application/json",
       Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "multipart/form-data",
     },
-    body: FORMDATA,
+    body: formData,
   }).then((Response) => {
     if (Response.ok) {
-      console.log("works", works);
+      console.log("Response", Response);
     }
   });
 };
