@@ -1,7 +1,6 @@
 /*********************** GET TOKEN *******************/
 
 const TOKEN = localStorage.getItem("token");
-console.log("tok", TOKEN);
 
 /*********************** GET WORKS *******************/
 
@@ -192,6 +191,7 @@ function modalForm() {
   const validateButton = document.createElement("button");
   validateButton.classList.add("validate");
   validateButton.innerText = "valider";
+  validateButton.type = "button";
   validateButton.addEventListener("click", addNewWork);
 
   sectionGallery.appendChild(titleFormModal);
@@ -221,37 +221,22 @@ ADDPICS.addEventListener("click", () => {
 /*********************** ADD A NEW WORK *******************/
 
 const addNewWork = () => {
-  // let image = document.getElementsByName("image")[0].files[0];
-  // const blob = new File([image], { type: "multipart/form-data" });
-  // let title = document.getElementsByName("title")[0];
-  // let category = document.getElementsByName("category")[0];
-
-  // const FORMDATA = new FormData();
-  // FORMDATA.append("image", blob);
-  // FORMDATA.append("title", title.value);
-  // FORMDATA.append("category", category.value);
-
   const formElement = document.querySelector("form");
   const formData = new FormData(formElement);
-  // formElement.method = "post";
-  // formElement.enctype = "multipart/form-data";
-  // const request = new XMLHttpRequest();
-  // request.open("POST", "http://localhost:5678/api/works");
-  // request.send(formData);
 
   console.log("form", formData);
 
   fetch("http://localhost:5678/api/works", {
     method: "POST",
     headers: {
-      accept: "application/json",
+      accept: "multipart/form-data",
       Authorization: `Bearer ${TOKEN}`,
-      "Content-Type": "multipart/form-data",
     },
     body: formData,
   }).then((Response) => {
     if (Response.ok) {
       console.log("Response", Response);
+      genererWorksModal(works);
     }
   });
 };
