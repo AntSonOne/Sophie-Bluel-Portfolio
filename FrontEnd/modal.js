@@ -104,6 +104,8 @@ const deleteWork = function (event) {
   }
 };
 
+/*********************** GENERATE MODAL WORKS *******************/
+
 function genererWorksModal(works) {
   document.querySelector(".modal-gallery").innerHTML = "";
 
@@ -131,9 +133,7 @@ function genererWorksModal(works) {
   }
 }
 
-/*********************** ADD A NEW WORK *******************/
-
-// creation du form d'ajout d'un projet dans la modale
+/*********************** ADD NEW WORK FORM *******************/
 
 function modalForm() {
   document.querySelector(".modal-wrapper").innerHTML = "";
@@ -150,40 +150,41 @@ function modalForm() {
   const formElement = document.createElement("form");
   formElement.classList.add("row");
 
-  //image element
+  //IMAGE ELEMENT
 
   const inputImage = document.createElement("input");
   inputImage.type = "file";
-  inputImage.name = "file";
+  inputImage.name = "image";
   inputImage.accept = "multipart/form-data";
   inputImage.dataset.image = "image";
 
-  // title element
+  // TITLE ELEMENT
 
   const labelTitleElement = document.createElement("label");
   labelTitleElement.innerText = "Titre";
-  labelTitleElement.name = "title";
   const titleElement = document.createElement("input");
+  titleElement.name = "title";
   titleElement.type = "text";
   titleElement.dataset.title = "title";
 
-  // catégorie element
+  // CATEGORY ELEMENT
+
   const labelElement = document.createElement("label");
   labelElement.innerText = "Catégorie";
   const categoryElement = document.createElement("select");
   categoryElement.name = "categories";
   const option1 = document.createElement("option");
-  option1.value = IDS[0];
+  option1.value = categoriesIds[0];
   option1.innerText = "Objets";
   inputImage.dataset.category = "category";
 
   const option2 = document.createElement("option");
-  option2.value = IDS[1];
+  option2.value = categoriesIds[1];
   option2.innerText = "Appartements";
   inputImage.dataset.category = "category";
 
   const option3 = document.createElement("option");
-  option3.value = IDS[2];
+  option3.value = categoriesIds[2];
   option3.innerText = "Hotels & restaurants";
   inputImage.dataset.category = "category";
 
@@ -208,23 +209,29 @@ function modalForm() {
 
 /* au click sur "ajouter une photo" */
 
-const addPics = document.querySelector(".add-pictures");
+const ADDPICS = document.querySelector(".add-pictures");
 
-addPics.addEventListener("click", () => {
+ADDPICS.addEventListener("click", () => {
   modalForm();
   document.querySelector(".add-pictures").style.display = "none";
   document.querySelector(".validate").style.display = null;
 });
 
-const addNewWork = function () {
-  var formElement = document.querySelector("form");
-  const formData = new FormData(formElement);
+/*********************** ADD A NEW WORK *******************/
 
-  var request = new XMLHttpRequest();
+const addNewWork = () => {
+  formData = new FormData();
 
-  request.open("POST", "http://localhost:5678/api/works");
-  request
-    .send(formData)
-    .then((response) => console.log("resp ", response))
-    .catch((err) => console.error("Error : " + err));
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+    body: FORMDATA,
+  }).then((Response) => {
+    if (Response.ok) {
+      works = works.filter((w) => w.id != id);
+      genererWorksModal(works);
+    }
+  });
 };
