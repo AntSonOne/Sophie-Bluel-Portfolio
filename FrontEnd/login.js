@@ -1,7 +1,7 @@
 const TOKEN = window.localStorage.getItem("token");
 const TOKENLENGTH = 143;
 
-const login = function () {
+const login = () => {
   const formulaireLogin = document.querySelector(".login");
   formulaireLogin.addEventListener("submit", async function (event) {
     event.preventDefault();
@@ -18,9 +18,9 @@ const login = function () {
       headers: { "Content-Type": "application/json" },
       body: chargeUtile,
     })
-      .then((response) => response.json())
-      .then(function (data) {
-        const accessToken = data.token;
+      .then((r) => r.json())
+      .then((d) => {
+        const accessToken = d.token;
         if (accessToken && accessToken.length === TOKENLENGTH) {
           window.localStorage.setItem("token", accessToken);
           location.replace("index.html");
