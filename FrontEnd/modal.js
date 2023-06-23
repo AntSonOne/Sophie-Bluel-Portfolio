@@ -154,7 +154,6 @@ function modalForm() {
   const inputImage = document.createElement("input");
   inputImage.type = "file";
   inputImage.name = "image";
-  inputImage.dataset.image = "image";
 
   // TITLE ELEMENT
 
@@ -166,7 +165,6 @@ function modalForm() {
   const titleElement = document.createElement("input");
   titleElement.name = "title";
   titleElement.type = "text";
-  titleElement.dataset.title = "title";
 
   // CATEGORY ELEMENT
 
@@ -180,23 +178,19 @@ function modalForm() {
   const option1 = document.createElement("option");
   option1.value = categoriesIds[0];
   option1.innerText = "Objets";
-  inputImage.dataset.category = "category";
 
   const option2 = document.createElement("option");
   option2.value = categoriesIds[1];
   option2.innerText = "Appartements";
-  inputImage.dataset.category = "category";
 
   const option3 = document.createElement("option");
   option3.value = categoriesIds[2];
   option3.innerText = "Hotels & restaurants";
-  inputImage.dataset.category = "category";
 
   // BUTTON ELEMENT
 
   const validateButton = document.createElement("button");
   validateButton.classList.add("validate");
-  validateButton.type = "submit";
   validateButton.innerText = "valider";
   validateButton.addEventListener("click", addNewWork);
 
@@ -231,20 +225,19 @@ const addNewWork = () => {
   let title = document.getElementsByName("title")[0];
   let category = document.getElementsByName("category")[0];
 
-  let formData = new FormData();
-  formData.append("image", image.files[0].name);
-  formData.append("title", title.value);
-  formData.append("category", category.value);
+  const FORMDATA = new FormData();
+  FORMDATA.append("image", image.files[0].name);
+  FORMDATA.append("title", title.value);
+  FORMDATA.append("category", category.value);
 
-  console.log("form", formData);
+  console.log("form", FORMDATA);
   fetch("http://localhost:5678/api/works", {
     method: "POST",
-
     headers: {
       Authorization: `Bearer ${TOKEN}`,
       "Content-Type": "multipart/form-data",
     },
-    body: formData,
+    body: FORMDATA,
   }).then((Response) => {
     if (Response.ok) {
       console.log("works", works);
