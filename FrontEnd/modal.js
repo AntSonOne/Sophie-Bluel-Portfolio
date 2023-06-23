@@ -1,21 +1,33 @@
-let works = null;
-const worksResponse = await fetch("http://localhost:5678/api/works");
-works = await worksResponse.json();
+/*********************** GET TOKEN *******************/
 
 const TOKEN = localStorage.getItem("token");
-const focusableSelector = "button, a, input, textarea";
+
+/*********************** GET WORKS *******************/
+
+let works = null;
+fetch("http://localhost:5678/api/works")
+  .then((r) => r.json())
+  .then((json) => {
+    works = json;
+    genererWorksModal(works);
+  });
+
+/*********************** GET WORKS CATEGORIES *******************/
+
+let categoriesIds = [];
+fetch("http://localhost:5678/api/categories")
+  .then((r) => r.json())
+  .then((json) => json.map((c) => categoriesIds.push(c.id)));
+
+/*********************** MODAL OPEN / CLOSE *******************/
+
+const FOCUSABLESSELECTOR = "button, a, input, textarea";
 let focusables = [];
-
-const CATEGORIES = await fetch("http://localhost:5678/api/categories").then(
-  (r) => r.json()
-);
-
-const IDS = CATEGORIES.map((c) => c.id);
 
 const openModal = function (event) {
   event.preventDefault();
   modal = document.querySelector(event.target.getAttribute("href"));
-  focusables = Array.from(modal.querySelectorAll(focusableSelector));
+  focusables = Array.from(modal.querySelectorAll(FOCUSABLESSELECTOR));
   focusables[0].focus();
   modal.style.display = null;
   modal.removeAttribute("aria-hidden");
@@ -119,8 +131,6 @@ function genererWorksModal(works) {
   }
 }
 
-genererWorksModal(works);
-
 /*********************** ADD A NEW WORK *******************/
 
 // creation du form d'ajout d'un projet dans la modale
@@ -200,7 +210,7 @@ function modalForm() {
 
 const addPics = document.querySelector(".add-pictures");
 
-addPics.addEventListener("click", function () {
+addPics.addEventListener("click", () => {
   modalForm();
   document.querySelector(".add-pictures").style.display = "none";
   document.querySelector(".validate").style.display = null;
@@ -208,16 +218,7 @@ addPics.addEventListener("click", function () {
 
 const addNewWork = function () {
   var formElement = document.querySelector("form");
-  var formData = new FormData(formElement);
-
-  // let fd = new FormData();
-
-  // fd.append("title", title);
-  // fd.append("category", category);
-
-  // var blob = new Blob([image], { image: image });
-
-  // fd.append("webmasterfile", blob);
+  const formData = new FormData(formElement);
 
   var request = new XMLHttpRequest();
 
@@ -226,20 +227,4 @@ const addNewWork = function () {
     .send(formData)
     .then((response) => console.log("resp ", response))
     .catch((err) => console.error("Error : " + err));
-  // console.log("event ", Array.from(fd));
-  // for (let obj of fd) {
-  //   console.log(obj);
-  // }
-  // fetch("http://localhost:5678/api/works", {
-  //   method: "POST",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: fd,
-  // })
-  //   .then((response) => {
-  //     response.json(), console.log("response ", response);
-  //   })
-  //   .then((data) => {
-  //     data, console.log("data ", data);
-  //   })
-  //   .catch((err) => console.error("Erreur : " + err));
 };
