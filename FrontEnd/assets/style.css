@@ -57,7 +57,7 @@ body {
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px 0
+	margin: 50px;
 }
 section {
 	margin: 50px 0
@@ -251,7 +251,7 @@ body {
 	font-size: 14px;
 }
 
-header, main, footer {
+main, footer {
 	max-width: 1140px;
 	margin:auto;
 }
@@ -265,7 +265,6 @@ header, main, footer {
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
-    margin-bottom: 38px;
 }
 
 .js-modal {
@@ -291,8 +290,7 @@ header, main, footer {
 	border-radius: 50px;
 }
 
-/********************** Modale **********************/
-
+/********************** MODAL **********************/
 .modal	{
 	display: flex;
 	justify-content: center;
@@ -307,13 +305,13 @@ header, main, footer {
 }
 
 .modal-wrapper {
+	padding: 2rem;
 	display: flex;
 	flex-direction: column;
 	gap: 20px;
 	overflow: auto;
-	padding: 1em;
-	width: 50%;
-	height: 70%;
+	width: 40%;
+	height: 60%;
 	max-width: calc(100vw - 20px);
 	border-radius: 4px;
 	background-color: #FFFFFF;
@@ -335,6 +333,7 @@ header, main, footer {
 
 .modal-wrapper h2, .add-pictures {
 	margin: 0 auto;
+	text-align: center;
 }
 
 .modal-wrapper a {
@@ -386,6 +385,15 @@ header, main, footer {
 	border: 1px solid #1D6154;
 	border-radius: 25px;
 }
+
+/********************** MODAL FORM **********************/
+.form-input{
+	background: white;
+	padding: 1em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
 
 @keyframes fadeIn {
 	from { opacity: 0;}
