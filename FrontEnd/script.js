@@ -266,6 +266,7 @@ function modalForm() {
 
   //dropdown
   const categoryElement = document.createElement("select");
+  categoryElement.classList.add("form-input");
   categoryElement.name = "category";
   const option1 = document.createElement("option");
   option1.value = categoriesIds[0];
@@ -326,6 +327,7 @@ const addNewWork = () => {
     body: formData,
   }).then((Response) => {
     if (Response.ok) {
+      works.push(Response.json().value);
       genererWorksModal(works);
     }
   });
