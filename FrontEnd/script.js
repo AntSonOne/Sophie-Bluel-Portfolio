@@ -9,13 +9,16 @@ const URL = "http://localhost:5678/api";
 /*********************** GET WORKS *******************/
 
 let works = null;
-fetch(`${URL}/works`)
-  .then((r) => r.json())
-  .then((json) => {
-    works = json;
-    genererWorks(works);
-    genererWorksModal(works);
-  });
+function getWorks() {
+  fetch(`${URL}/works`)
+    .then((r) => r.json())
+    .then((json) => {
+      works = json;
+      genererWorks(works);
+      genererWorksModal(works);
+    });
+}
+getWorks();
 
 /*********************** GET WORKS CATEGORIES *******************/
 
@@ -26,6 +29,8 @@ fetch(`${URL}/categories`)
 /*********************** GENERATE WORKS *******************/
 
 const genererWorks = (works) => {
+  document.querySelector(".gallery").innerHTML = "";
+
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
     const sectionGallery = document.querySelector(".gallery");
@@ -123,6 +128,7 @@ const deleteWork = (event) => {
     if (Response.ok) {
       works = works.filter((w) => w.id != id);
       genererWorksModal(works);
+      genererWorks(works);
     }
   });
 };
@@ -327,8 +333,8 @@ const addNewWork = () => {
     body: formData,
   }).then((Response) => {
     if (Response.ok) {
-      works.push(Response.json().value);
-      genererWorksModal(works);
+      getWorks();
+      genererWorks(works);
     }
   });
 };
