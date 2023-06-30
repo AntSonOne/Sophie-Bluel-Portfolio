@@ -335,6 +335,8 @@ const addNewWork = () => {
     if (Response.ok) {
       getWorks();
       genererWorks(works);
+    } else {
+      alert("Veuillez compléter tous les champs");
     }
   });
 };
