@@ -64,6 +64,7 @@ const openModal = (event) => {
   modal.setAttribute("aria-modal", true);
   modal.addEventListener("click", closeModal);
   modal.querySelector(".close").addEventListener("click", closeModal);
+  modal.querySelector(".back").addEventListener("click", openModal);
   modal
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
@@ -201,9 +202,10 @@ if (TOKEN) {
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
-  document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".modal-form").innerHTML = "";
-
+  document.querySelector(".modal-gallery").innerHTML = "";
+  document.querySelector(".gallery-title").innerText = "Galerie photo";
+  document.querySelector(".add-pictures").style.display = null;
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
     const sectionGallery = document.querySelector(".modal-gallery");
@@ -307,7 +309,6 @@ function modalForm() {
   categoryElement.appendChild(option3);
   formElement.appendChild(validateButton);
 }
-
 /* au click sur "ajouter une photo" */
 
 const ADDPICS = document.querySelector(".add-pictures");

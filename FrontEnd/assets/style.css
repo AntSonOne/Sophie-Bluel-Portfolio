@@ -322,8 +322,8 @@ main, footer {
 .modal-top-icons {
 	display: flex;
 	justify-content: space-between;
-
 }
+
 .close	{
 	padding: 0.35em;
 }
