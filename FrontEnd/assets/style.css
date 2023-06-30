@@ -310,8 +310,8 @@ main, footer {
 	flex-direction: column;
 	gap: 20px;
 	overflow: auto;
-	width: 40%;
-	height: 60%;
+	width: 50%;
+	height: 70%;
 	max-width: calc(100vw - 20px);
 	border-radius: 4px;
 	background-color: #FFFFFF;
