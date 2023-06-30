@@ -319,14 +319,25 @@ main, footer {
 	animation: slideFromTop .5s both .1s;
 }
 
-.close {
-	border: none;
-	background: none;
-	margin: 0;
-	align-self: self-end;
+.modal-top-icons {
+	display: flex;
+	justify-content: space-between;
+
+}
+.close	{
+	padding: 0.35em;
 }
 
 .close:hover {
+	border-radius: 5px;
+	box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+.back	{
+	padding: 0.35em;
+}
+
+.back:hover {
 	border-radius: 5px;
 	box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
