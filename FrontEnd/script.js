@@ -206,6 +206,9 @@ function genererWorksModal(works) {
   document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".gallery-title").innerText = "Galerie photo";
   document.querySelector(".add-pictures").style.display = null;
+  document.querySelector(".delete-gallery").style.display = null;
+  document.querySelector(".back").style.display = "none";
+
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
     const sectionGallery = document.querySelector(".modal-gallery");
@@ -235,6 +238,7 @@ function genererWorksModal(works) {
 function modalForm() {
   document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".gallery-title").innerHTML = "";
+  document.querySelector(".back").style.display = null;
 
   const sectionGallery = document.querySelector(".modal-form");
 
@@ -316,6 +320,7 @@ const ADDPICS = document.querySelector(".add-pictures");
 ADDPICS.addEventListener("click", () => {
   modalForm();
   document.querySelector(".add-pictures").style.display = "none";
+  document.querySelector(".delete-gallery").style.display = "none";
   document.querySelector(".validate").style.display = null;
 });
 
