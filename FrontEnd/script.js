@@ -15,7 +15,6 @@ function getWorks() {
     .then((json) => {
       works = json;
       genererWorks(works);
-      genererWorksModal(works);
     });
 }
 getWorks();
@@ -54,6 +53,8 @@ let focusables = [];
 let modal = null;
 
 const openModal = (event) => {
+  genererWorksModal(works);
+
   event.preventDefault();
   modal = document.querySelector(event.target.getAttribute("href"));
   focusables = Array.from(modal.querySelectorAll(FOCUSABLESSELECTOR));
@@ -63,6 +64,7 @@ const openModal = (event) => {
   modal.setAttribute("aria-modal", true);
   modal.addEventListener("click", closeModal);
   modal.querySelector(".close").addEventListener("click", closeModal);
+  modal.querySelector(".back").addEventListener("click", openModal);
   modal
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
@@ -71,7 +73,6 @@ const openModal = (event) => {
 };
 
 const closeModal = (event) => {
-  genererWorksModal(works);
   if (modal === null) return;
   event.preventDefault();
   modal.style.display = "none";
@@ -201,8 +202,12 @@ if (TOKEN) {
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
-  document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".modal-form").innerHTML = "";
+  document.querySelector(".modal-gallery").innerHTML = "";
+  document.querySelector(".gallery-title").innerText = "Galerie photo";
+  document.querySelector(".add-pictures").style.display = null;
+  document.querySelector(".delete-gallery").style.display = null;
+  document.querySelector(".back").style.display = "none";
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
@@ -217,7 +222,7 @@ function genererWorksModal(works) {
     const deleteElement = document.createElement("button");
     deleteElement.classList.add("js-delete");
     deleteElement.dataset.id = works[i].id;
-    deleteElement.innerText = "supprimer";
+    deleteElement.innerHTML = '<i class="fa-solid fa-trash-can">' + "</i>";
     deleteElement.addEventListener("click", deleteWork);
 
     sectionGallery.appendChild(workElement);
@@ -233,6 +238,7 @@ function genererWorksModal(works) {
 function modalForm() {
   document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".gallery-title").innerHTML = "";
+  document.querySelector(".back").style.display = null;
 
   const sectionGallery = document.querySelector(".modal-form");
 
@@ -307,7 +313,6 @@ function modalForm() {
   categoryElement.appendChild(option3);
   formElement.appendChild(validateButton);
 }
-
 /* au click sur "ajouter une photo" */
 
 const ADDPICS = document.querySelector(".add-pictures");
@@ -315,6 +320,7 @@ const ADDPICS = document.querySelector(".add-pictures");
 ADDPICS.addEventListener("click", () => {
   modalForm();
   document.querySelector(".add-pictures").style.display = "none";
+  document.querySelector(".delete-gallery").style.display = "none";
   document.querySelector(".validate").style.display = null;
 });
 
@@ -335,6 +341,7 @@ const addNewWork = () => {
     if (Response.ok) {
       getWorks();
       genererWorks(works);
+      alert("Votre nouveau travail a bien été créé !");
     } else {
       alert("Veuillez compléter tous les champs");
     }
