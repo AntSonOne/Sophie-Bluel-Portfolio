@@ -15,7 +15,6 @@ function getWorks() {
     .then((json) => {
       works = json;
       genererWorks(works);
-      genererWorksModal(works);
     });
 }
 getWorks();
@@ -54,6 +53,8 @@ let focusables = [];
 let modal = null;
 
 const openModal = (event) => {
+  genererWorksModal(works);
+
   event.preventDefault();
   modal = document.querySelector(event.target.getAttribute("href"));
   focusables = Array.from(modal.querySelectorAll(FOCUSABLESSELECTOR));
@@ -71,7 +72,6 @@ const openModal = (event) => {
 };
 
 const closeModal = (event) => {
-  genererWorksModal(works);
   if (modal === null) return;
   event.preventDefault();
   modal.style.display = "none";
@@ -335,6 +335,7 @@ const addNewWork = () => {
     if (Response.ok) {
       getWorks();
       genererWorks(works);
+      alert("Votre nouveau travail a bien été créé !");
     } else {
       alert("Veuillez compléter tous les champs");
     }
