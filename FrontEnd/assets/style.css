@@ -365,6 +365,21 @@ main, footer {
 	width: 100%;
 }
 
+.js-delete {
+	background: black;
+	border: none;
+	border-radius: 3px;
+	padding: 4px 5px;
+	text-decoration: none;
+}
+.js-delete i{
+	color: white;
+}
+
+.js-delete:hover{
+	cursor: pointer
+}
+
 .projects{
 	display: flex;
 	justify-content: center;

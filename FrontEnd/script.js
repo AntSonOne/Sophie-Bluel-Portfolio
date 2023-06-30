@@ -222,7 +222,7 @@ function genererWorksModal(works) {
     const deleteElement = document.createElement("button");
     deleteElement.classList.add("js-delete");
     deleteElement.dataset.id = works[i].id;
-    deleteElement.innerText = "supprimer";
+    deleteElement.innerHTML = '<i class="fa-solid fa-trash-can">' + "</i>";
     deleteElement.addEventListener("click", deleteWork);
 
     sectionGallery.appendChild(workElement);
