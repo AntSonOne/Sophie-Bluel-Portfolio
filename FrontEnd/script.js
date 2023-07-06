@@ -208,6 +208,7 @@ function genererWorksModal(works) {
   document.querySelector(".add-pictures").style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
   document.querySelector(".back").style.display = "none";
+  document.querySelector(".validate").style.display = "none";
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
@@ -220,6 +221,7 @@ function genererWorksModal(works) {
     imageElement.src = article.imageUrl;
     const buttonElement = document.createElement("p");
     buttonElement.innerText = "éditer";
+    buttonElement.classList.add("edit");
     const deleteElement = document.createElement("button");
     deleteElement.classList.add("js-delete");
     deleteElement.dataset.id = works[i].id;
@@ -240,11 +242,9 @@ function modalForm() {
   document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".gallery-title").innerHTML = "";
   document.querySelector(".back").style.display = null;
+  document.querySelector(".gallery-title").innerText = "Ajout photo";
 
   const sectionGallery = document.querySelector(".modal-form");
-
-  const titleFormModal = document.createElement("h2");
-  titleFormModal.innerText = "Ajout photo";
 
   const container = document.createElement("div");
   container.classList.add("container");
@@ -259,6 +259,7 @@ function modalForm() {
   const inputImage = document.createElement("input");
   inputImage.type = "file";
   inputImage.name = "image";
+  inputImage.classList.add("custom-file-input");
 
   // TITLE ELEMENT
 
@@ -295,13 +296,9 @@ function modalForm() {
 
   // BUTTON ELEMENT
 
-  const validateButton = document.createElement("button");
-  validateButton.classList.add("validate");
-  validateButton.innerText = "valider";
-  validateButton.type = "button";
+  const validateButton = document.querySelector(".validate");
   validateButton.addEventListener("click", addNewWork);
 
-  sectionGallery.appendChild(titleFormModal);
   sectionGallery.appendChild(container);
   container.appendChild(formElement);
   formElement.appendChild(inputImage);
@@ -312,7 +309,6 @@ function modalForm() {
   categoryElement.appendChild(option1);
   categoryElement.appendChild(option2);
   categoryElement.appendChild(option3);
-  formElement.appendChild(validateButton);
 }
 /* au click sur "ajouter une photo" */
 
