@@ -221,6 +221,7 @@ function genererWorksModal(works) {
     imageElement.src = article.imageUrl;
     const buttonElement = document.createElement("p");
     buttonElement.innerText = "éditer";
+    buttonElement.classList.add("edit");
     const deleteElement = document.createElement("button");
     deleteElement.classList.add("js-delete");
     deleteElement.dataset.id = works[i].id;

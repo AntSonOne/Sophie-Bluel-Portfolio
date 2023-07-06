@@ -13,7 +13,7 @@ dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
 article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+figure, figcaption, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -25,39 +25,45 @@ time, mark, audio, video {
 	scroll-behavior: smooth;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
 	line-height: 1;
+	background: #FFFEF8;
+	max-width: 1440px;
+	font-size: 14px;
+	font-family: 'Work Sans' ;
 }
+
+footer {
+	background: #FFFFFF;
+}
+
 ol, ul {
 	list-style: none;
 }
+
 blockquote, q {
 	quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
 	content: '';
 	content: none;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
 /** end reset css**/
-body {
-	max-width: 1140px;
-	margin:auto;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
-}
 header {
 	display: flex;
 	justify-content: space-between;
-	margin: 50px;
+	margin: 50px 150px;
 }
 section {
 	margin: 50px 0
@@ -88,12 +94,15 @@ h2{
 nav ul {
 	display: flex;
 	align-items: center;
-	list-style-type: none;
-
 }
+
 nav li {
-	padding: 0 10px;
-	font-size: 1.2em;
+	padding: 0 22px;
+	font-size: 1.2rem;
+}
+
+nav img{
+	width: 1.571rem;
 }
 
 li:hover {
@@ -118,15 +127,19 @@ nav li a {
 	width: 80%;
 }
 
-#introduction article {
-	flex: 1
+.introduction {
+	flex: 1;
 }
+
 #introduction h2 {
 	margin-bottom: 1em;
 }
 
-#introduction p {
+.introduction p {
 	margin-bottom: 0.5em;
+	color: #3D3D3D;
+	line-height: normal;
+	width: 28.857rem;
 }
 #portfolio h2 {
 	text-align: center;
@@ -212,7 +225,7 @@ input[type="submit"]{
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
-	margin: 2em
+	padding: 2em 7.643rem;
 }
 
 /****************** LOGIN PAGE ******************/
@@ -222,11 +235,11 @@ footer nav ul {
 	margin: 37px;
 }
 .login {
-	margin: 0 auto;
-	width: 30%;
+	padding: 0 33%;
 	display: flex;
 	flex-direction: column;
-	gap: 30px
+	gap: 30px;
+	margin: 0 auto;
 }
 
 input {
@@ -244,14 +257,7 @@ input {
 
 /* modale */
 
-body {
-	max-width: 1440px;
-	margin: 0;
-	font-family: 'Work Sans' ;
-	font-size: 14px;
-}
-
-main, footer {
+main {
 	max-width: 1140px;
 	margin:auto;
 }
@@ -376,6 +382,7 @@ main, footer {
 	padding: 4px 5px;
 	text-decoration: none;
 }
+
 .js-delete i{
 	color: white;
 }
@@ -390,6 +397,10 @@ main, footer {
 	align-items: center;
 	gap: 2rem;
 	margin: 4rem;
+}
+
+.edit {
+	display: flex;
 }
 
 .container{
