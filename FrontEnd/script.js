@@ -295,10 +295,7 @@ function modalForm() {
 
   // BUTTON ELEMENT
 
-  const validateButton = document.createElement("button");
-  validateButton.classList.add("validate");
-  validateButton.innerText = "valider";
-  validateButton.type = "button";
+  const validateButton = document.querySelector(".validate");
   validateButton.addEventListener("click", addNewWork);
 
   sectionGallery.appendChild(titleFormModal);
@@ -312,7 +309,6 @@ function modalForm() {
   categoryElement.appendChild(option1);
   categoryElement.appendChild(option2);
   categoryElement.appendChild(option3);
-  formElement.appendChild(validateButton);
 }
 /* au click sur "ajouter une photo" */
 
