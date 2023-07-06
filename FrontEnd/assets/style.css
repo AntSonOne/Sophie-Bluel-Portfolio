@@ -242,6 +242,12 @@ footer nav ul {
 	margin: 0 auto;
 }
 
+.login div {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
 input {
 	font-size:  16px;
 	padding: 16px;
@@ -301,6 +307,7 @@ main {
 }
 
 .modal-wrapper {
+	border-radius: 10px; 
 	padding: 2rem;
 	display: flex;
 	flex-direction: column;
@@ -309,7 +316,6 @@ main {
 	width: 50%;
 	height: 80%;
 	max-width: calc(100vw - 20px);
-	border-radius: 4px;
 	background-color: #FFFFFF;
 	color: black;
 	animation: slideFromTop .5s both .1s;
@@ -419,7 +425,7 @@ main {
 }
 
 hr {
-	margin: 0 5.5rem;
+	margin: 2.143rem 5.5rem;
 	width: auto;
 	padding: 1px;
 	border: none;
