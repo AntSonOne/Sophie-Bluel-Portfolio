@@ -365,7 +365,14 @@ main, footer {
 	width: 100%;
 }
 
+.figure {
+	position: relative;
+}
+
 .js-delete {
+	position: absolute;
+	top: 5px;
+	right: 5px;
 	background: black;
 	border: none;
 	border-radius: 3px;
@@ -403,6 +410,12 @@ main, footer {
 	gap: 1rem;
 }
 
+hr {
+	height: 1px;
+	width: 100%;
+	border: none;
+	background: #B3B3B3;
+}
 .validate {
 	padding: 9px 20px;
 	background-color: #1D6154;

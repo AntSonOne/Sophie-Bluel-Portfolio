@@ -214,6 +214,7 @@ function genererWorksModal(works) {
     const sectionGallery = document.querySelector(".modal-gallery");
 
     const workElement = document.createElement("figure");
+    workElement.classList.add("figure");
     workElement.dataset.id = works[i].id;
     const imageElement = document.createElement("img");
     imageElement.src = article.imageUrl;
