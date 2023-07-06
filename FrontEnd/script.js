@@ -208,6 +208,7 @@ function genererWorksModal(works) {
   document.querySelector(".add-pictures").style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
   document.querySelector(".back").style.display = "none";
+  document.querySelector(".validate").style.display = "none";
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
@@ -240,11 +241,9 @@ function modalForm() {
   document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".gallery-title").innerHTML = "";
   document.querySelector(".back").style.display = null;
+  document.querySelector(".gallery-title").innerText = "Ajout photo";
 
   const sectionGallery = document.querySelector(".modal-form");
-
-  const titleFormModal = document.createElement("h2");
-  titleFormModal.innerText = "Ajout photo";
 
   const container = document.createElement("div");
   container.classList.add("container");
@@ -259,6 +258,7 @@ function modalForm() {
   const inputImage = document.createElement("input");
   inputImage.type = "file";
   inputImage.name = "image";
+  inputImage.classList.add("custom-file-input");
 
   // TITLE ELEMENT
 
@@ -298,7 +298,6 @@ function modalForm() {
   const validateButton = document.querySelector(".validate");
   validateButton.addEventListener("click", addNewWork);
 
-  sectionGallery.appendChild(titleFormModal);
   sectionGallery.appendChild(container);
   container.appendChild(formElement);
   formElement.appendChild(inputImage);
