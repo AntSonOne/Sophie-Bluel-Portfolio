@@ -255,6 +255,7 @@ function modalForm() {
   formElement.classList.add("row");
 
   //IMAGE ELEMENT
+  const div1 = document.createElement("div");
 
   const inputImage = document.createElement("input");
   inputImage.type = "file";
@@ -263,6 +264,7 @@ function modalForm() {
 
   // TITLE ELEMENT
 
+  const div2 = document.createElement("div");
   //label
   const labelTitleElement = document.createElement("label");
   labelTitleElement.innerText = "Titre";
@@ -273,6 +275,7 @@ function modalForm() {
   titleElement.type = "text";
 
   // CATEGORY ELEMENT
+  const div3 = document.createElement("div");
 
   //label
   const labelElement = document.createElement("label");
@@ -301,10 +304,13 @@ function modalForm() {
 
   sectionGallery.appendChild(container);
   container.appendChild(formElement);
-  formElement.appendChild(inputImage);
-  formElement.appendChild(labelTitleElement);
+  formElement.appendChild(div1);
+  div1.appendChild(inputImage);
+  formElement.appendChild(div2);
+  div2.appendChild(labelTitleElement);
   formElement.appendChild(titleElement);
-  formElement.appendChild(labelElement);
+  formElement.appendChild(div3);
+  div3.appendChild(labelElement);
   formElement.appendChild(categoryElement);
   categoryElement.appendChild(option1);
   categoryElement.appendChild(option2);
