@@ -69,8 +69,6 @@ const openModal = (event) => {
   modal
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
-  let body = document.querySelector("body");
-  body.style.overflow = "hidden";
 };
 
 const closeModal = (event) => {
@@ -288,6 +286,8 @@ function modalForm() {
   categoryElement.classList.add("form-input");
   categoryElement.name = "category";
 
+  const option0 = document.createElement("option");
+
   const option1 = document.createElement("option");
   option1.value = categoriesIds[0];
   option1.innerText = "Objets";
@@ -316,6 +316,7 @@ function modalForm() {
   formElement.appendChild(div3);
   div3.appendChild(labelElement);
   formElement.appendChild(categoryElement);
+  categoryElement.appendChild(option0);
   categoryElement.appendChild(option1);
   categoryElement.appendChild(option2);
   categoryElement.appendChild(option3);
@@ -337,7 +338,6 @@ const addNewWork = () => {
   const formElement = document.querySelector("form");
   const formData = new FormData(formElement);
 
-  console.log("va2", inputImage);
   fetch(`${URL}/works`, {
     method: "POST",
     headers: {

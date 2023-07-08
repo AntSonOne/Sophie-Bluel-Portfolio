@@ -25,9 +25,14 @@ time, mark, audio, video {
 	scroll-behavior: smooth;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, header, hgroup, menu, nav, section, .modify {
 	display: block;
 }
+
+.gallery, .gallery img, .modal, .modal-gallery img{
+	width: 100%;
+}
+
 body {
 	line-height: 1;
 	background: #FFFEF8;
@@ -123,12 +128,7 @@ nav li a {
 }
 #introduction img {
 	display: block;
-	margin: auto;
 	width: 80%;
-}
-
-.introduction {
-	flex: 1;
 }
 
 #introduction h2 {
@@ -168,7 +168,7 @@ nav li a {
 }
 
 .gallery {
-	width: 100%;
+
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
@@ -176,7 +176,6 @@ nav li a {
 }
 
 .gallery img {
-	width: 100%;
 
 }
 #contact {
@@ -282,12 +281,15 @@ main {
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
+	position: sticky;
+	top: 0;
 }
 
-.js-modal {
+.modify {
 	color: black;
 	text-decoration: none;
 	justify-content: center;
+	padding: 1rem 0;
 }
 
 .publish-changes {
@@ -299,19 +301,15 @@ main {
 
 /********************** MODAL **********************/
 .modal	{
-	display: flex;
-	justify-content: center;
-	align-items: center;
 	position: fixed;
-	top: 0;
-	left: 0;
-	width: 100%;
 	height: 100%;
 	background: rgba(0, 0, 0, 0.8);
 	animation: fadeIn 1s both;
 }
 
 .modal-wrapper {
+	margin: 1rem auto;
+	text-align: center;
 	border-radius: 10px; 
 	padding: 2rem;
 	display: flex;
@@ -319,7 +317,7 @@ main {
 	gap: 20px;
 	overflow: auto;
 	width: 40%;
-	height: 85%;
+	height: 75%;
 	max-width: calc(100vw - 20px);
 	background-color: #FFFFFF;
 	color: black;
@@ -349,11 +347,6 @@ main {
 	box-shadow: 0 0 15px rgba(0,0,0,0.2);
 }
 
-.modal-wrapper {
-	margin: 0 auto;
-	text-align: center;
-}
-
 .modal-wrapper a {
 	margin: 0 auto;
 	text-decoration: none;
@@ -376,7 +369,6 @@ main {
 }
 
 .modal-gallery img {
-	width: 100%;
 	height: 90%;
 }
 
@@ -468,6 +460,7 @@ hr {
 }
 
 .form-input{
+	font-size: 1rem;
 	background: white;
 	padding: 1.2rem;
 	border: none;
