@@ -69,8 +69,6 @@ const openModal = (event) => {
   modal
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
-  let body = document.querySelector("body");
-  body.style.overflow = "hidden";
 };
 
 const closeModal = (event) => {
