@@ -25,6 +25,7 @@ let categoriesIds = [];
 fetch(`${URL}/categories`)
   .then((r) => r.json())
   .then((json) => json.map((c) => categoriesIds.push(c.id)));
+
 /*********************** GENERATE WORKS *******************/
 
 const genererWorks = (works) => {
@@ -115,25 +116,6 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-/*********************** DELETE A WORK *******************/
-
-const deleteWork = (event) => {
-  const id = event.target.dataset.id;
-
-  fetch(`${URL}/works/${id}`, {
-    method: "DELETE",
-    headers: {
-      Authorization: `Bearer ${TOKEN}`,
-    },
-  }).then((Response) => {
-    if (Response.ok) {
-      works = works.filter((w) => w.id != id);
-      genererWorksModal(works);
-      genererWorks(works);
-    }
-  });
-};
-
 /*********************** WORK *******************/
 
 if (!TOKEN) {
@@ -175,9 +157,11 @@ if (!TOKEN) {
     document.querySelector(".gallery").innerHTML = "";
     genererWorks(hotelsFiltered);
   });
+
+  document.querySelector(".logInOut").innerText = "login";
 }
 
-let logoutNav = document.querySelector(".logout");
+let logoutNav = document.querySelector(".logInOut");
 const removeToken = () => {
   localStorage.removeItem("token");
 };
@@ -192,11 +176,8 @@ if (TOKEN) {
   let adminNav = document.querySelector(".admin");
   adminNav.style.display = null;
 
-  let loginNav = document.querySelector(".login");
-  loginNav.style.display = "none";
-
-  logoutNav.style.display = null;
   logoutNav.addEventListener("click", removeToken);
+  document.querySelector(".logInOut").innerText = "logout";
 }
 
 /*********************** GENERATE MODAL WORKS *******************/
@@ -207,7 +188,7 @@ function genererWorksModal(works) {
   document.querySelector(".gallery-title").innerText = "Galerie photo";
   document.querySelector(".add-pictures").style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
-  document.querySelector(".back").style.display = "none";
+  document.querySelector(".back").style.visibility = "hidden";
   document.querySelector(".validate").style.display = "none";
 
   for (let i = 0; i < works.length; i++) {
@@ -236,12 +217,31 @@ function genererWorksModal(works) {
   }
 }
 
+/*********************** DELETE A WORK *******************/
+
+const deleteWork = (event) => {
+  const id = event.target.dataset.id;
+
+  fetch(`${URL}/works/${id}`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${TOKEN}`,
+    },
+  }).then((Response) => {
+    if (Response.ok) {
+      works = works.filter((w) => w.id != id);
+      genererWorksModal(works);
+      genererWorks(works);
+    }
+  });
+};
+
 /*********************** ADD NEW WORK FORM *******************/
 
 function modalForm() {
   document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".gallery-title").innerHTML = "";
-  document.querySelector(".back").style.display = null;
+  document.querySelector(".back").style.visibility = null;
   document.querySelector(".gallery-title").innerText = "Ajout photo";
 
   const sectionGallery = document.querySelector(".modal-form");
@@ -256,11 +256,13 @@ function modalForm() {
 
   //IMAGE ELEMENT
   const div1 = document.createElement("div");
-
+  const labelImage = document.createElement("label");
+  labelImage.classList.add("custom-file-input");
+  labelImage.for = "image";
   const inputImage = document.createElement("input");
   inputImage.type = "file";
   inputImage.name = "image";
-  inputImage.classList.add("custom-file-input");
+  inputImage.id = "image";
 
   // TITLE ELEMENT
 
@@ -285,6 +287,7 @@ function modalForm() {
   const categoryElement = document.createElement("select");
   categoryElement.classList.add("form-input");
   categoryElement.name = "category";
+
   const option1 = document.createElement("option");
   option1.value = categoriesIds[0];
   option1.innerText = "Objets";
@@ -305,7 +308,8 @@ function modalForm() {
   sectionGallery.appendChild(container);
   container.appendChild(formElement);
   formElement.appendChild(div1);
-  div1.appendChild(inputImage);
+  div1.appendChild(labelImage);
+  labelImage.appendChild(inputImage);
   formElement.appendChild(div2);
   div2.appendChild(labelTitleElement);
   formElement.appendChild(titleElement);
@@ -333,6 +337,7 @@ const addNewWork = () => {
   const formElement = document.querySelector("form");
   const formData = new FormData(formElement);
 
+  console.log("va2", inputImage);
   fetch(`${URL}/works`, {
     method: "POST",
     headers: {
