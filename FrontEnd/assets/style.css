@@ -282,6 +282,8 @@ main {
 	justify-content: center;
 	align-items: center;
 	gap: 1rem;
+	position: sticky;
+	top: 0;
 }
 
 .js-modal {
@@ -299,6 +301,7 @@ main {
 
 /********************** MODAL **********************/
 .modal	{
+	margin-top: 58px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
