@@ -123,12 +123,7 @@ nav li a {
 }
 #introduction img {
 	display: block;
-	margin: auto;
 	width: 80%;
-}
-
-.introduction {
-	flex: 1;
 }
 
 #introduction h2 {
@@ -286,7 +281,7 @@ main {
 	top: 0;
 }
 
-.js-modal {
+.modify {
 	color: black;
 	text-decoration: none;
 	justify-content: center;
