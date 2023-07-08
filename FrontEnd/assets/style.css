@@ -25,7 +25,7 @@ time, mark, audio, video {
 	scroll-behavior: smooth;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, header, hgroup, menu, nav, section {
+article, aside, details, figcaption, figure, header, hgroup, menu, nav, section, .modify {
 	display: block;
 }
 body {
@@ -285,6 +285,7 @@ main {
 	color: black;
 	text-decoration: none;
 	justify-content: center;
+	padding: 1rem 0;
 }
 
 .publish-changes {
