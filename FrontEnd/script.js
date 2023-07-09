@@ -168,8 +168,14 @@ if (TOKEN) {
   let filters = document.querySelector(".filters");
   filters.style.display = "none";
 
-  let modifierButton = document.querySelector(".js-modal");
+  let modifierButton = document.querySelector(".modify");
   modifierButton.style.display = null;
+
+  let modifierButton2 = document.querySelector(".modify2");
+  modifierButton2.style.display = null;
+
+  let modifierButtonModal = document.querySelector(".js-modal");
+  modifierButtonModal.style.display = null;
 
   let adminNav = document.querySelector(".admin");
   adminNav.style.display = null;
@@ -263,6 +269,8 @@ function modalForm() {
   btnAddPic.innerText = "+ Ajouter photo";
   const pFormat = document.createElement("p");
   pFormat.innerText = "jpg, png : 4mo max";
+  const newWorkImg = document.createElement("img");
+  newWorkImg.classList.add("newWorkImg");
   const labelImage = document.createElement("label");
   labelImage.classList.add("custom-file-input");
   labelImage.for = "image";
@@ -323,6 +331,7 @@ function modalForm() {
   labelImage.appendChild(btnAddPic);
   labelImage.appendChild(pFormat);
   labelImage.appendChild(inputImage);
+  labelImage.appendChild(newWorkImg);
   formElement.appendChild(div2);
   div2.appendChild(labelTitleElement);
   formElement.appendChild(titleElement);
