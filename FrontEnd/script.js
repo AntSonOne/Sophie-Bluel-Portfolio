@@ -254,9 +254,18 @@ function modalForm() {
 
   //IMAGE ELEMENT
   const div1 = document.createElement("div");
+  const logoImg = document.createElement("i");
+  logoImg.innerHTML = '<i class="fa-solid fa-image logoImg">' + "</i>";
+  logoImg.classList.add("logoImg");
+  const btnAddPic = document.createElement("span");
+  btnAddPic.classList.add("btnSpan");
+  btnAddPic.innerText = "+ Ajouter photo";
+  const pFormat = document.createElement("p");
+  pFormat.innerText = "jpg, png : 4mo max";
   const labelImage = document.createElement("label");
   labelImage.classList.add("custom-file-input");
   labelImage.for = "image";
+
   const inputImage = document.createElement("input");
   inputImage.type = "file";
   inputImage.name = "image";
@@ -309,6 +318,9 @@ function modalForm() {
   container.appendChild(formElement);
   formElement.appendChild(div1);
   div1.appendChild(labelImage);
+  labelImage.appendChild(logoImg);
+  labelImage.appendChild(btnAddPic);
+  labelImage.appendChild(pFormat);
   labelImage.appendChild(inputImage);
   formElement.appendChild(div2);
   div2.appendChild(labelTitleElement);

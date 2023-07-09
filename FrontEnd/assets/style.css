@@ -449,6 +449,20 @@ hr {
 	background: #E8F1F6;
 	width: 100%; 
 	min-height: 169px; 
+	display: flex;
+	flex-direction: column;
+	justify-content: flex-end;
+}
+.logoImg{
+	color: #306685;
+}
+
+.btnSpan{
+	color: #306685;
+	border-radius: 50px;
+	background: #CBD6DC; 
+	padding: 10px 33px;
+	margin: 0 123px
 }
 
 .form-input{
