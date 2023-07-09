@@ -442,7 +442,7 @@ hr {
 /********************** MODAL FORM **********************/
 
 #image{
-	visibility: hidden;
+	visibility: collapse;
 }
 
 .custom-file-input{
@@ -451,10 +451,13 @@ hr {
 	min-height: 169px; 
 	display: flex;
 	flex-direction: column;
-	justify-content: flex-end;
+	justify-content: center;
+	gap: 15px;
+	border-radius: 3px; 
 }
 .logoImg{
-	color: #306685;
+	color: #CBD6DC;
+	font-size: 3em;
 }
 
 .btnSpan{
@@ -462,7 +465,8 @@ hr {
 	border-radius: 50px;
 	background: #CBD6DC; 
 	padding: 10px 33px;
-	margin: 0 123px
+	margin: 0 123px;
+	line-height: normal; 
 }
 
 .form-input{

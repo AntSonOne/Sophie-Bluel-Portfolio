@@ -255,8 +255,9 @@ function modalForm() {
   //IMAGE ELEMENT
   const div1 = document.createElement("div");
   const logoImg = document.createElement("i");
-  logoImg.innerHTML = '<i class="fa-solid fa-image logoImg">' + "</i>";
   logoImg.classList.add("logoImg");
+  logoImg.classList.add("fa-regular");
+  logoImg.classList.add("fa-image");
   const btnAddPic = document.createElement("span");
   btnAddPic.classList.add("btnSpan");
   btnAddPic.innerText = "+ Ajouter photo";
