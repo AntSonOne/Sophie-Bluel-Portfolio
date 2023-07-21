@@ -323,6 +323,19 @@ function modalForm() {
   const validateButton = document.querySelector(".validate");
   validateButton.addEventListener("click", addNewWork);
 
+  const inputs = [inputImage, titleElement, categoryElement];
+
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      const noEmptyInput = inputs.every((input) => input.value !== "");
+      if (noEmptyInput) {
+        document.querySelector(".validate").style.backgroundColor = "#1D6154";
+      } else {
+        document.querySelector(".validate").style.backgroundColor = "#BFBFBF";
+      }
+    });
+  });
+
   sectionGallery.appendChild(container);
   container.appendChild(formElement);
   formElement.appendChild(div1);
