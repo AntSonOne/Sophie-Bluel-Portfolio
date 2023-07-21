@@ -323,6 +323,19 @@ function modalForm() {
   const validateButton = document.querySelector(".validate");
   validateButton.addEventListener("click", addNewWork);
 
+  const inputs = [inputImage, titleElement, categoryElement];
+
+  inputs.forEach((input) => {
+    input.addEventListener("input", () => {
+      const noEmptyInput = inputs.every((input) => input.value !== "");
+      if (noEmptyInput) {
+        document.querySelector(".validate").style.backgroundColor = "#1D6154";
+      } else {
+        document.querySelector(".validate").style.backgroundColor = "#BFBFBF";
+      }
+    });
+  });
+
   sectionGallery.appendChild(container);
   container.appendChild(formElement);
   formElement.appendChild(div1);
@@ -377,6 +390,25 @@ const addNewWork = () => {
     }
   });
 };
+
+function telecharger() {
+  const input = document.getElementsById("image");
+  var telecharger_image = "";
+  const reader = new FileReader();
+
+  // Ajoute un écouteur d'événements pour charger l'image
+  reader.addEventListener("load", () => {
+    telecharger_image = reader.result;
+    console.log("download", telecharger_image);
+    const photo = document.getElementsByClassName("newWorkImg");
+
+    photo.style.backgroundImage = `url(${telecharger_image} )`;
+  });
+
+  reader.readAsDataURL(this.files[0]);
+}
+
+document.getElementsById("image").addEventListener("change", telecharger);
 
 // const buttons = document.querySelectorAll('.button-filter');
 
