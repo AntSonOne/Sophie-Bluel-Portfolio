@@ -391,25 +391,6 @@ const addNewWork = () => {
   });
 };
 
-function telecharger() {
-  const input = document.getElementsById("image");
-  var telecharger_image = "";
-  const reader = new FileReader();
-
-  // Ajoute un écouteur d'événements pour charger l'image
-  reader.addEventListener("load", () => {
-    telecharger_image = reader.result;
-    console.log("download", telecharger_image);
-    const photo = document.getElementsByClassName("newWorkImg");
-
-    photo.style.backgroundImage = `url(${telecharger_image} )`;
-  });
-
-  reader.readAsDataURL(this.files[0]);
-}
-
-document.getElementsById("image").addEventListener("change", telecharger);
-
 // const buttons = document.querySelectorAll('.button-filter');
 
 // let value;
