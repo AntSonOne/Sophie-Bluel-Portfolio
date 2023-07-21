@@ -476,6 +476,15 @@ hr {
 	outline: none;
 }
 
+.newWorkImg {
+	position: absolute;
+	left: 33%;
+	right: 33%;
+	height: 169px;
+	width: 129px;
+	margin: 0 auto;
+}
+
 @keyframes fadeIn {
 	from { opacity: 0;}
 	to { opacity: 1;}

@@ -69,6 +69,7 @@ const openModal = (event) => {
   modal
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
+  document.querySelector("body").style.overflow = "hidden";
 };
 
 const closeModal = (event) => {
@@ -85,6 +86,7 @@ const closeModal = (event) => {
     .querySelector(".js-modal-stop")
     .removeEventListener("click", stopPropagation);
   modal = null;
+  document.querySelector("body").style.overflow = "unset";
 };
 
 const stopPropagation = (event) => {
@@ -268,9 +270,11 @@ function modalForm() {
   btnAddPic.classList.add("btnSpan");
   btnAddPic.innerText = "+ Ajouter photo";
   const pFormat = document.createElement("p");
+  pFormat.classList.add("pFormat");
   pFormat.innerText = "jpg, png : 4mo max";
   const newWorkImg = document.createElement("img");
   newWorkImg.classList.add("newWorkImg");
+  newWorkImg.style.visibility = "hidden";
   const labelImage = document.createElement("label");
   labelImage.classList.add("custom-file-input");
   labelImage.for = "image";
@@ -279,6 +283,7 @@ function modalForm() {
   inputImage.type = "file";
   inputImage.name = "image";
   inputImage.id = "image";
+  inputImage.addEventListener("change", uploadImg);
 
   // TITLE ELEMENT
 
@@ -340,10 +345,12 @@ function modalForm() {
   container.appendChild(formElement);
   formElement.appendChild(div1);
   div1.appendChild(labelImage);
+
   labelImage.appendChild(logoImg);
   labelImage.appendChild(btnAddPic);
   labelImage.appendChild(pFormat);
   labelImage.appendChild(inputImage);
+
   labelImage.appendChild(newWorkImg);
   formElement.appendChild(div2);
   div2.appendChild(labelTitleElement);
@@ -391,18 +398,21 @@ const addNewWork = () => {
   });
 };
 
-// const buttons = document.querySelectorAll('.button-filter');
+// UPLOAD IMAGE IN INPUT FIELD
 
-// let value;
-// buttons.forEach((v) => {
-//   v.addEventListener('click', () => {
-//     value = works.filter((w) => {
+function uploadImg() {
+  let upload_image = "";
+  const reader = new FileReader();
 
-//       if(typeof w.category.name !== "undefined") {
-//         return w.category.name === v.dataset.name
-//       }
+  reader.addEventListener("load", () => {
+    upload_image = reader.result;
+    const photo = document.querySelector(".newWorkImg");
+    photo.style.visibility = "unset";
+    photo.setAttribute("src", `${upload_image}`);
+    document.querySelector(".logoImg").style.visibility = "hidden";
+    document.querySelector(".btnSpan").style.visibility = "hidden";
+    document.querySelector(".pFormat").style.visibility = "hidden";
+  });
 
-//       return w;
-//     });
-//   });
-// });
+  reader.readAsDataURL(this.files[0]);
+}
