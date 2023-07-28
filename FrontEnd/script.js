@@ -6,6 +6,14 @@ const TOKEN = localStorage.getItem("token");
 
 const URL = "http://localhost:5678/api";
 
+/*********************** MODAL GALLERY *******************/
+
+const MODALGALLERY = document.querySelector(".modal-gallery");
+
+/*********************** MODAL FORM VALIDATE BUTTON *******************/
+
+const VALIDATEBUTTON = document.querySelector(".validate");
+
 /*********************** GET WORKS *******************/
 
 let works = null;
@@ -54,6 +62,7 @@ let focusables = [];
 let modal = null;
 
 const openModal = (event) => {
+  MODALGALLERY.innerHTML = "";
   genererWorksModal(works);
 
   event.preventDefault();
@@ -65,7 +74,6 @@ const openModal = (event) => {
   modal.setAttribute("aria-modal", true);
   modal.addEventListener("click", closeModal);
   modal.querySelector(".close").addEventListener("click", closeModal);
-  modal.querySelector(".back").addEventListener("click", openModal);
   modal
     .querySelector(".js-modal-stop")
     .addEventListener("click", stopPropagation);
@@ -103,9 +111,7 @@ const focusInModal = (event) => {
   focusables[index].focus();
 };
 
-document.querySelectorAll(".js-modal").forEach((a) => {
-  a.addEventListener("click", openModal);
-});
+document.querySelector(".js-modal").addEventListener("click", openModal);
 
 window.addEventListener("keydown", (event) => {
   if (event.key === "Escape" || event.key === "Esc") {
@@ -189,17 +195,16 @@ if (TOKEN) {
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
-  document.querySelector(".modal-form").style.display = "none";
-  document.querySelector(".modal-gallery").innerHTML = "";
-  document.querySelector(".gallery-title").innerText = "Galerie photo";
   document.querySelector(".add-pictures").style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
-  document.querySelector(".back").style.visibility = "hidden";
-  document.querySelector(".validate").style.display = "none";
+  document.querySelector(".hr-gallery").style.display = null;
+  document.querySelector(".modal-form").style.display = "none";
+  document.querySelector(".modal-gallery").style.display = null;
+  document.querySelector(".gallery-title").innerText = "Galerie photo";
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
-    const sectionGallery = document.querySelector(".modal-gallery");
+    const sectionGallery = MODALGALLERY;
 
     const workElement = document.createElement("figure");
     workElement.classList.add("figure");
@@ -212,7 +217,9 @@ function genererWorksModal(works) {
     const deleteElement = document.createElement("button");
     deleteElement.classList.add("js-delete");
     deleteElement.dataset.id = works[i].id;
-    deleteElement.innerHTML = '<i class="fa-solid fa-trash-can">' + "</i>";
+    deleteElement.innerHTML =
+      '<i class="fa-solid fa-trash-can" style="pointer-events: none;">' +
+      "</i>";
     deleteElement.addEventListener("click", deleteWork);
 
     sectionGallery.appendChild(workElement);
@@ -239,6 +246,7 @@ const deleteWork = (event) => {
   }).then((Response) => {
     if (Response.ok) {
       works = works.filter((w) => w.id != id);
+      MODALGALLERY.innerHTML = "";
       genererWorksModal(works);
       genererWorks(works);
     }
@@ -250,19 +258,26 @@ const deleteWork = (event) => {
 const ADDPICS = document.querySelector(".add-pictures");
 
 const displayGallery = () => {
-  document.querySelector(".modal-gallery").style.display = null;
+  MODALGALLERY.style.display = null;
+  document.querySelector(".add-pictures").style.display = null;
+  document.querySelector(".delete-gallery").style.display = null;
+  document.querySelector(".hr-gallery").style.display = null;
+  document.querySelector(".back").style.visibility = "hidden";
+  VALIDATEBUTTON.style.display = "none";
+  document.querySelector(".modal-form").style.display = "none";
 };
+const backBtn = document.querySelector(".back");
+backBtn.addEventListener("click", displayGallery);
 
 ADDPICS.addEventListener("click", () => {
-  document.querySelector(".modal-gallery").style.display = "none";
+  MODALGALLERY.style.display = "none";
   document.querySelector(".add-pictures").style.display = "none";
+  document.querySelector(".hr-gallery").style.display = "none";
   document.querySelector(".delete-gallery").style.display = "none";
-  const backBtn = document.querySelector(".back");
   backBtn.style.visibility = null;
-  backBtn.addEventListener("click", displayGallery);
   document.querySelector(".gallery-title").innerText = "Ajout photo";
   document.querySelector(".modal-form").style.display = null;
-  document.querySelector(".validate").style.display = null;
+  VALIDATEBUTTON.style.display = null;
 });
 
 const inputImage = document.querySelector(".input-img");
@@ -277,9 +292,9 @@ inputs.forEach((input) => {
   input.addEventListener("input", () => {
     const noEmptyInput = inputs.every((input) => input.value !== "");
     if (noEmptyInput) {
-      document.querySelector(".validate").style.backgroundColor = "#1D6154";
+      VALIDATEBUTTON.style.backgroundColor = "#1D6154";
     } else {
-      document.querySelector(".validate").style.backgroundColor = "#BFBFBF";
+      VALIDATEBUTTON.style.backgroundColor = "#BFBFBF";
     }
   });
 });
@@ -328,5 +343,4 @@ const addNewWork = () => {
   });
 };
 
-const validateButton = document.querySelector(".validate");
-validateButton.addEventListener("click", addNewWork);
+VALIDATEBUTTON.addEventListener("click", addNewWork);
