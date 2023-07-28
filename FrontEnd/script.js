@@ -189,7 +189,7 @@ if (TOKEN) {
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
-  document.querySelector(".modal-form").innerHTML = "";
+  document.querySelector(".modal-form").style.display = "none";
   document.querySelector(".modal-gallery").innerHTML = "";
   document.querySelector(".gallery-title").innerText = "Galerie photo";
   document.querySelector(".add-pictures").style.display = null;
@@ -226,8 +226,10 @@ function genererWorksModal(works) {
 /*********************** DELETE A WORK *******************/
 
 const deleteWork = (event) => {
-  // const id = event.target.tagName === "I" ? event.target.parentNode.dataset.id : event.target.dataset.id;
-  const id = event.target.dataset.id;
+  const id =
+    event.target.tagName === "I"
+      ? event.target.parentNode.dataset.id
+      : event.target.dataset.id;
 
   fetch(`${URL}/works/${id}`, {
     method: "DELETE",
@@ -245,139 +247,66 @@ const deleteWork = (event) => {
 
 /*********************** ADD NEW WORK FORM *******************/
 
-function modalForm() {
-  document.querySelector(".modal-gallery").innerHTML = "";
-  document.querySelector(".gallery-title").innerHTML = "";
-  document.querySelector(".back").style.visibility = null;
-  document.querySelector(".gallery-title").innerText = "Ajout photo";
-
-  const sectionGallery = document.querySelector(".modal-form");
-
-  const container = document.createElement("div");
-  container.classList.add("container");
-
-  // FORM
-
-  const formElement = document.createElement("form");
-  formElement.classList.add("row");
-
-  //IMAGE ELEMENT
-  const div1 = document.createElement("div");
-  const logoImg = document.createElement("i");
-  logoImg.classList.add("logo-img");
-  logoImg.classList.add("fa-regular");
-  logoImg.classList.add("fa-image");
-  const btnAddPic = document.createElement("span");
-  btnAddPic.classList.add("btn-span");
-  btnAddPic.innerText = "+ Ajouter photo";
-  const pFormat = document.createElement("p");
-  pFormat.classList.add("p-format");
-  pFormat.innerText = "jpg, png : 4mo max";
-  const newWorkImg = document.createElement("img");
-  newWorkImg.classList.add("new-work-img");
-  newWorkImg.style.visibility = "hidden";
-  const labelImage = document.createElement("label");
-  labelImage.classList.add("custom-file-input");
-  labelImage.for = "image";
-
-  const inputImage = document.createElement("input");
-  inputImage.type = "file";
-  inputImage.name = "image";
-  inputImage.id = "image";
-  inputImage.addEventListener("change", uploadImg);
-
-  // TITLE ELEMENT
-
-  const div2 = document.createElement("div");
-  //label
-  const labelTitleElement = document.createElement("label");
-  labelTitleElement.innerText = "Titre";
-
-  //input
-  const titleElement = document.createElement("input");
-  titleElement.name = "title";
-  titleElement.type = "text";
-
-  // CATEGORY ELEMENT
-  const div3 = document.createElement("div");
-
-  //label
-  const labelElement = document.createElement("label");
-  labelElement.innerText = "Catégorie";
-
-  //dropdown
-  const categoryElement = document.createElement("select");
-  categoryElement.classList.add("form-input");
-  categoryElement.name = "category";
-
-  const option0 = document.createElement("option");
-
-  const option1 = document.createElement("option");
-  option1.value = categoriesIds[0];
-  option1.innerText = "Objets";
-
-  const option2 = document.createElement("option");
-  option2.value = categoriesIds[1];
-  option2.innerText = "Appartements";
-
-  const option3 = document.createElement("option");
-  option3.value = categoriesIds[2];
-  option3.innerText = "Hotels & restaurants";
-
-  // BUTTON ELEMENT
-
-  const validateButton = document.querySelector(".validate");
-  validateButton.addEventListener("click", addNewWork);
-
-  const inputs = [inputImage, titleElement, categoryElement];
-
-  inputs.forEach((input) => {
-    input.addEventListener("input", () => {
-      const noEmptyInput = inputs.every((input) => input.value !== "");
-      if (noEmptyInput) {
-        document.querySelector(".validate").style.backgroundColor = "#1D6154";
-      } else {
-        document.querySelector(".validate").style.backgroundColor = "#BFBFBF";
-      }
-    });
-  });
-
-  sectionGallery.appendChild(container);
-  container.appendChild(formElement);
-  formElement.appendChild(div1);
-  div1.appendChild(labelImage);
-
-  labelImage.appendChild(logoImg);
-  labelImage.appendChild(btnAddPic);
-  labelImage.appendChild(pFormat);
-  labelImage.appendChild(inputImage);
-
-  labelImage.appendChild(newWorkImg);
-  formElement.appendChild(div2);
-  div2.appendChild(labelTitleElement);
-  formElement.appendChild(titleElement);
-  formElement.appendChild(div3);
-  div3.appendChild(labelElement);
-  formElement.appendChild(categoryElement);
-  categoryElement.appendChild(option0);
-  categoryElement.appendChild(option1);
-  categoryElement.appendChild(option2);
-  categoryElement.appendChild(option3);
-}
-/* au click sur "ajouter une photo" */
-
 const ADDPICS = document.querySelector(".add-pictures");
 
+const displayGallery = () => {
+  document.querySelector(".modal-gallery").style.display = null;
+};
+
 ADDPICS.addEventListener("click", () => {
-  modalForm();
+  document.querySelector(".modal-gallery").style.display = "none";
   document.querySelector(".add-pictures").style.display = "none";
   document.querySelector(".delete-gallery").style.display = "none";
+  const backBtn = document.querySelector(".back");
+  backBtn.style.visibility = null;
+  backBtn.addEventListener("click", displayGallery);
+  document.querySelector(".gallery-title").innerText = "Ajout photo";
+  document.querySelector(".modal-form").style.display = null;
   document.querySelector(".validate").style.display = null;
 });
+
+const inputImage = document.querySelector(".input-img");
+inputImage.addEventListener("change", uploadImg);
+
+const titleElement = document.querySelector(".input-title");
+const categoryElement = document.querySelector(".form-input");
+
+const inputs = [inputImage, titleElement, categoryElement];
+
+inputs.forEach((input) => {
+  input.addEventListener("input", () => {
+    const noEmptyInput = inputs.every((input) => input.value !== "");
+    if (noEmptyInput) {
+      document.querySelector(".validate").style.backgroundColor = "#1D6154";
+    } else {
+      document.querySelector(".validate").style.backgroundColor = "#BFBFBF";
+    }
+  });
+});
+
+// UPLOAD IMAGE IN INPUT FIELD
+
+function uploadImg() {
+  let upload_image = "";
+  const reader = new FileReader();
+
+  reader.addEventListener("load", () => {
+    upload_image = reader.result;
+    const photo = document.querySelector(".new-work-img ");
+    photo.style.visibility = "unset";
+    photo.setAttribute("src", `${upload_image}`);
+    document.querySelector(".logo-img").style.visibility = "hidden";
+    document.querySelector(".btn-span").style.visibility = "hidden";
+    document.querySelector(".p-format").style.visibility = "hidden";
+  });
+
+  reader.readAsDataURL(this.files[0]);
+}
 
 /*********************** ADD A NEW WORK *******************/
 
 const addNewWork = () => {
+  console.log("here I am");
   const formElement = document.querySelector("form");
   const formData = new FormData(formElement);
 
@@ -399,21 +328,5 @@ const addNewWork = () => {
   });
 };
 
-// UPLOAD IMAGE IN INPUT FIELD
-
-function uploadImg() {
-  let upload_image = "";
-  const reader = new FileReader();
-
-  reader.addEventListener("load", () => {
-    upload_image = reader.result;
-    const photo = document.querySelector(".new-work-img ");
-    photo.style.visibility = "unset";
-    photo.setAttribute("src", `${upload_image}`);
-    document.querySelector(".logo-img").style.visibility = "hidden";
-    document.querySelector(".btn-span").style.visibility = "hidden";
-    document.querySelector(".p-format").style.visibility = "hidden";
-  });
-
-  reader.readAsDataURL(this.files[0]);
-}
+const validateButton = document.querySelector(".validate");
+validateButton.addEventListener("click", addNewWork);

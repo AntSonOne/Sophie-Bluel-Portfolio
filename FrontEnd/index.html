@@ -39,7 +39,34 @@
           <i class="close fa-solid fa-xmark"></i>
         </div>
         <h2 class="gallery-title"></h2>
-        <div class="modal-form"></div>
+        <div class="modal-form">
+          <div class="container">
+            <form class="row">
+              <div>
+                <label class="custom-file-input"
+                  ><i class="logo-img fa-regular fa-image"></i
+                  ><span class="btn-span">+ Ajouter photo</span>
+                  <p class="p-format">jpg, png : 4mo max</p>
+                  <input
+                    type="file"
+                    class="input-img"
+                    name="image"
+                    id="image" />
+                  <img class="new-work-img" style="visibility: hidden"
+                /></label>
+              </div>
+              <div><label>Titre</label></div>
+              <input name="title" class="input-title" type="text" />
+              <div><label>Catégorie</label></div>
+              <select class="form-input" name="category">
+                <option></option>
+                <option value="1">Objets</option>
+                <option value="2">Appartements</option>
+                <option value="3">Hotels &amp; restaurants</option>
+              </select>
+            </form>
+          </div>
+        </div>
         <div class="modal-gallery"></div>
         <hr />
         <button class="validate btn" style="display: none">Valider</button>
