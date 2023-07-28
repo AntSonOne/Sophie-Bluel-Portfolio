@@ -226,8 +226,10 @@ function genererWorksModal(works) {
 /*********************** DELETE A WORK *******************/
 
 const deleteWork = (event) => {
-  // const id = event.target.tagName === "I" ? event.target.parentNode.dataset.id : event.target.dataset.id;
-  const id = event.target.dataset.id;
+  const id =
+    event.target.tagName === "I"
+      ? event.target.parentNode.dataset.id
+      : event.target.dataset.id;
 
   fetch(`${URL}/works/${id}`, {
     method: "DELETE",
