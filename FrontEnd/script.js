@@ -226,6 +226,7 @@ function genererWorksModal(works) {
 /*********************** DELETE A WORK *******************/
 
 const deleteWork = (event) => {
+  // const id = event.target.tagName === "I" ? event.target.parentNode.dataset.id : event.target.dataset.id;
   const id = event.target.dataset.id;
 
   fetch(`${URL}/works/${id}`, {
@@ -263,17 +264,17 @@ function modalForm() {
   //IMAGE ELEMENT
   const div1 = document.createElement("div");
   const logoImg = document.createElement("i");
-  logoImg.classList.add("logoImg");
+  logoImg.classList.add("logo-img");
   logoImg.classList.add("fa-regular");
   logoImg.classList.add("fa-image");
   const btnAddPic = document.createElement("span");
-  btnAddPic.classList.add("btnSpan");
+  btnAddPic.classList.add("btn-span");
   btnAddPic.innerText = "+ Ajouter photo";
   const pFormat = document.createElement("p");
-  pFormat.classList.add("pFormat");
+  pFormat.classList.add("p-format");
   pFormat.innerText = "jpg, png : 4mo max";
   const newWorkImg = document.createElement("img");
-  newWorkImg.classList.add("newWorkImg");
+  newWorkImg.classList.add("new-work-img");
   newWorkImg.style.visibility = "hidden";
   const labelImage = document.createElement("label");
   labelImage.classList.add("custom-file-input");
@@ -406,12 +407,12 @@ function uploadImg() {
 
   reader.addEventListener("load", () => {
     upload_image = reader.result;
-    const photo = document.querySelector(".newWorkImg");
+    const photo = document.querySelector(".new-work-img ");
     photo.style.visibility = "unset";
     photo.setAttribute("src", `${upload_image}`);
-    document.querySelector(".logoImg").style.visibility = "hidden";
-    document.querySelector(".btnSpan").style.visibility = "hidden";
-    document.querySelector(".pFormat").style.visibility = "hidden";
+    document.querySelector(".logo-img").style.visibility = "hidden";
+    document.querySelector(".btn-span").style.visibility = "hidden";
+    document.querySelector(".p-format").style.visibility = "hidden";
   });
 
   reader.readAsDataURL(this.files[0]);
