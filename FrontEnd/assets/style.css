@@ -441,7 +441,6 @@ hr {
 /********************** MODAL FORM **********************/
 
 #image{
-	/* visibility: collapse; */
 	visibility: hidden;
     position: absolute;
     top: 0;
@@ -461,12 +460,12 @@ hr {
 	gap: 15px;
 	border-radius: 3px; 
 }
-.logoImg{
+.logo-img{
 	color: #CBD6DC;
 	font-size: 3em;
 }
 
-.btnSpan{
+.btn-span{
 	color: #306685;
 	border-radius: 50px;
 	background: #CBD6DC; 
@@ -483,7 +482,7 @@ hr {
 	outline: none;
 }
 
-.newWorkImg {
+.new-work-img {
 	position: absolute;
 	left: 33%;
 	right: 33%;
@@ -496,7 +495,6 @@ hr {
 	from { opacity: 0;}
 	to { opacity: 1;}
 }
-
 
 @keyframes slideFromTop {
 	from { transform: translateY(-50px); }
