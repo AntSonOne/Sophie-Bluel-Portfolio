@@ -195,7 +195,8 @@ if (TOKEN) {
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
-  document.querySelector(".add-pictures").style.display = null;
+  document.querySelector(".back").style.visibility = "hidden";
+  ADDPICS.style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
   document.querySelector(".hr-gallery").style.display = null;
   document.querySelector(".modal-form").style.display = "none";
@@ -259,7 +260,7 @@ const ADDPICS = document.querySelector(".add-pictures");
 
 const displayGallery = () => {
   MODALGALLERY.style.display = null;
-  document.querySelector(".add-pictures").style.display = null;
+  ADDPICS.style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
   document.querySelector(".hr-gallery").style.display = null;
   document.querySelector(".back").style.visibility = "hidden";
@@ -271,7 +272,7 @@ backBtn.addEventListener("click", displayGallery);
 
 ADDPICS.addEventListener("click", () => {
   MODALGALLERY.style.display = "none";
-  document.querySelector(".add-pictures").style.display = "none";
+  ADDPICS.style.display = "none";
   document.querySelector(".hr-gallery").style.display = "none";
   document.querySelector(".delete-gallery").style.display = "none";
   backBtn.style.visibility = null;
@@ -281,11 +282,13 @@ ADDPICS.addEventListener("click", () => {
 });
 
 const inputImage = document.querySelector(".input-img");
+inputImage.value = null;
 inputImage.addEventListener("change", uploadImg);
 
 const titleElement = document.querySelector(".input-title");
-const categoryElement = document.querySelector(".form-input");
-
+titleElement.value = "";
+const categoryElement = document.querySelector(".select-category");
+categoryElement.value = 0;
 const inputs = [inputImage, titleElement, categoryElement];
 
 inputs.forEach((input) => {
@@ -321,7 +324,6 @@ function uploadImg() {
 /*********************** ADD A NEW WORK *******************/
 
 const addNewWork = () => {
-  console.log("here I am");
   const formElement = document.querySelector("form");
   const formData = new FormData(formElement);
 
