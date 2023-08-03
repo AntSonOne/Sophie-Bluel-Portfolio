@@ -17,10 +17,13 @@ const MODALGALLERY = document.querySelector(".modal-gallery");
 const BACKARROW = document.querySelector(".back");
 
 const INPUTIMG = document.querySelector(".input-img");
+const NEWIMG = document.querySelector(".new-work-img");
 const TITLEINPUT = document.querySelector(".input-title");
 const CATEGORYSELECT = document.querySelector(".select-category");
 
 const VALIDATEBUTTON = document.querySelector(".validate");
+
+const INPUTS = [INPUTIMG, TITLEINPUT, CATEGORYSELECT];
 
 /*********************** GET WORKS *******************/
 
@@ -278,10 +281,27 @@ const displayGallery = () => {
 
 BACKARROW.addEventListener("click", displayGallery);
 
+INPUTS.forEach((input) => {
+  input.addEventListener("input", () => {
+    const noEmptyInput = INPUTS.every((input) => input.value !== "");
+    if (noEmptyInput) {
+      VALIDATEBUTTON.style.backgroundColor = "#1D6154";
+    } else {
+      VALIDATEBUTTON.style.backgroundColor = "#BFBFBF";
+    }
+  });
+});
+
 ADDPICS.addEventListener("click", () => {
-  INPUTIMG.value = null;
+  VALIDATEBUTTON.style.backgroundColor = "#BFBFBF";
+  document.querySelector(".logo-img").style.visibility = null;
+  document.querySelector(".btn-span").style.visibility = null;
+  document.querySelector(".p-format").style.visibility = null;
+  INPUTIMG.value = "";
+  NEWIMG.setAttribute("src", "");
+  NEWIMG.style.visibility = "hidden";
   TITLEINPUT.value = "";
-  CATEGORYSELECT.value = 0;
+  CATEGORYSELECT.value = "";
   MODALGALLERY.style.display = "none";
   ADDPICS.style.display = "none";
   HRGALLERY.style.display = "none";
@@ -292,20 +312,8 @@ ADDPICS.addEventListener("click", () => {
   VALIDATEBUTTON.style.display = null;
 });
 
-const inputs = [INPUTIMG, TITLEINPUT, CATEGORYSELECT];
+/*********************** UPLOAD IMAGE IN INPUT FIELD *******************/
 
-inputs.forEach((input) => {
-  input.addEventListener("input", () => {
-    const noEmptyInput = inputs.every((input) => input.value !== "");
-    if (noEmptyInput) {
-      VALIDATEBUTTON.style.backgroundColor = "#1D6154";
-    } else {
-      VALIDATEBUTTON.style.backgroundColor = "#BFBFBF";
-    }
-  });
-});
-
-// UPLOAD IMAGE IN INPUT FIELD
 INPUTIMG.addEventListener("change", uploadImg);
 
 function uploadImg() {
@@ -314,9 +322,9 @@ function uploadImg() {
 
   reader.addEventListener("load", () => {
     upload_image = reader.result;
-    const photo = document.querySelector(".new-work-img ");
-    photo.style.visibility = "unset";
-    photo.setAttribute("src", `${upload_image}`);
+
+    NEWIMG.style.visibility = "unset";
+    NEWIMG.setAttribute("src", `${upload_image}`);
     document.querySelector(".logo-img").style.visibility = "hidden";
     document.querySelector(".btn-span").style.visibility = "hidden";
     document.querySelector(".p-format").style.visibility = "hidden";
