@@ -6,15 +6,27 @@ const TOKEN = localStorage.getItem("token");
 
 const URL = "http://localhost:5678/api";
 
+/*********************** MAIN PAGE *******************/
+
+const LOGBTN = document.querySelector(".logInOut");
+
 /*********************** MODAL GALLERY *******************/
 
-const HRGALLERY = document.querySelector(".hr-gallery");
-
+const GALLERY = document.querySelector(".gallery");
 const MODALGALLERY = document.querySelector(".modal-gallery");
+const MODALTITLE = document.querySelector(".gallery-title");
+const HRGALLERY = document.querySelector(".hr-gallery");
+const ADDPICS = document.querySelector(".add-pictures");
+const DELETEGALLERY = document.querySelector(".delete-gallery");
 
 /*********************** MODAL FORM  *******************/
 
+const MODALFORM = document.querySelector(".modal-form");
 const BACKARROW = document.querySelector(".back");
+
+const LOGOIMG = document.querySelector(".logo-img");
+const BTNSPAN = document.querySelector(".btn-span");
+const PFORMAT = document.querySelector(".p-format");
 
 const INPUTIMG = document.querySelector(".input-img");
 const NEWIMG = document.querySelector(".new-work-img");
@@ -48,11 +60,11 @@ fetch(`${URL}/categories`)
 /*********************** GENERATE WORKS *******************/
 
 const genererWorks = (works) => {
-  document.querySelector(".gallery").innerHTML = "";
+  GALLERY.innerHTML = "";
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
-    const sectionGallery = document.querySelector(".gallery");
+    const sectionGallery = GALLERY;
     const workElement = document.createElement("figure");
     workElement.dataset.id = works[i].id;
     const imageElement = document.createElement("img");
@@ -133,7 +145,7 @@ window.addEventListener("keydown", (event) => {
   }
 });
 
-/*********************** WORK *******************/
+/*********************** LOGGED OUT *******************/
 
 if (!TOKEN) {
   const boutonTous = document.querySelector(".all");
@@ -142,7 +154,7 @@ if (!TOKEN) {
     const tousFiltered = works.filter(function (work) {
       return work;
     });
-    document.querySelector(".gallery").innerHTML = "";
+    GALLERY.innerHTML = "";
     genererWorks(tousFiltered);
   });
 
@@ -152,7 +164,7 @@ if (!TOKEN) {
     const objetsFiltered = works.filter(function (work) {
       return work.category.name === "Objets";
     });
-    document.querySelector(".gallery").innerHTML = "";
+    GALLERY.innerHTML = "";
     genererWorks(objetsFiltered);
   });
   const boutonAppartements = document.querySelector(".appartements");
@@ -161,7 +173,7 @@ if (!TOKEN) {
     const appartementsFiltered = works.filter(function (work) {
       return work.category.name === "Appartements";
     });
-    document.querySelector(".gallery").innerHTML = "";
+    GALLERY.innerHTML = "";
     genererWorks(appartementsFiltered);
   });
 
@@ -171,17 +183,18 @@ if (!TOKEN) {
     const hotelsFiltered = works.filter(function (work) {
       return work.category.name === "Hotels & restaurants";
     });
-    document.querySelector(".gallery").innerHTML = "";
+    GALLERY.innerHTML = "";
     genererWorks(hotelsFiltered);
   });
 
-  document.querySelector(".logInOut").innerText = "login";
+  LOGBTN.innerText = "login";
 }
 
-let logoutNav = document.querySelector(".logInOut");
 const removeToken = () => {
   localStorage.removeItem("token");
 };
+
+/*********************** LOGGED *******************/
 
 if (TOKEN) {
   let filters = document.querySelector(".filters");
@@ -199,20 +212,20 @@ if (TOKEN) {
   let adminNav = document.querySelector(".admin");
   adminNav.style.display = null;
 
-  logoutNav.addEventListener("click", removeToken);
-  document.querySelector(".logInOut").innerText = "logout";
+  LOGBTN.addEventListener("click", removeToken);
+  LOGBTN.innerText = "logout";
 }
 
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
+  MODALFORM.style.display = "none";
   BACKARROW.style.visibility = "hidden";
-  ADDPICS.style.display = null;
-  document.querySelector(".delete-gallery").style.display = null;
+  MODALTITLE.innerText = "Galerie photo";
+  MODALGALLERY.style.display = null;
   HRGALLERY.style.display = null;
-  document.querySelector(".modal-form").style.display = "none";
-  document.querySelector(".modal-gallery").style.display = null;
-  document.querySelector(".gallery-title").innerText = "Galerie photo";
+  ADDPICS.style.display = null;
+  DELETEGALLERY.style.display = null;
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
@@ -245,10 +258,7 @@ function genererWorksModal(works) {
 /*********************** DELETE A WORK *******************/
 
 const deleteWork = (event) => {
-  const id =
-    event.target.tagName === "I"
-      ? event.target.parentNode.dataset.id
-      : event.target.dataset.id;
+  const id = event.target.dataset.id;
 
   fetch(`${URL}/works/${id}`, {
     method: "DELETE",
@@ -267,16 +277,14 @@ const deleteWork = (event) => {
 
 /*********************** ADD NEW WORK FORM *******************/
 
-const ADDPICS = document.querySelector(".add-pictures");
-
 const displayGallery = () => {
-  MODALGALLERY.style.display = null;
-  ADDPICS.style.display = null;
-  document.querySelector(".delete-gallery").style.display = null;
-  HRGALLERY.style.display = null;
+  MODALFORM.style.display = "none";
   BACKARROW.style.visibility = "hidden";
   VALIDATEBUTTON.style.display = "none";
-  document.querySelector(".modal-form").style.display = "none";
+  MODALGALLERY.style.display = null;
+  HRGALLERY.style.display = null;
+  ADDPICS.style.display = null;
+  DELETEGALLERY.style.display = null;
 };
 
 BACKARROW.addEventListener("click", displayGallery);
@@ -294,9 +302,9 @@ INPUTS.forEach((input) => {
 
 ADDPICS.addEventListener("click", () => {
   VALIDATEBUTTON.style.backgroundColor = "#BFBFBF";
-  document.querySelector(".logo-img").style.visibility = null;
-  document.querySelector(".btn-span").style.visibility = null;
-  document.querySelector(".p-format").style.visibility = null;
+  LOGOIMG.style.visibility = null;
+  BTNSPAN.style.visibility = null;
+  PFORMAT.style.visibility = null;
   INPUTIMG.value = "";
   NEWIMG.setAttribute("src", "");
   NEWIMG.style.visibility = "hidden";
@@ -305,10 +313,10 @@ ADDPICS.addEventListener("click", () => {
   MODALGALLERY.style.display = "none";
   ADDPICS.style.display = "none";
   HRGALLERY.style.display = "none";
-  document.querySelector(".delete-gallery").style.display = "none";
+  DELETEGALLERY.style.display = "none";
   BACKARROW.style.visibility = null;
-  document.querySelector(".gallery-title").innerText = "Ajout photo";
-  document.querySelector(".modal-form").style.display = null;
+  MODALTITLE.innerText = "Ajout photo";
+  MODALFORM.style.display = null;
   VALIDATEBUTTON.style.display = null;
 });
 
@@ -324,10 +332,10 @@ function uploadImg() {
     upload_image = reader.result;
 
     NEWIMG.style.visibility = "unset";
+    LOGOIMG.style.visibility = "hidden";
+    BTNSPAN.style.visibility = "hidden";
+    PFORMAT.style.visibility = "hidden";
     NEWIMG.setAttribute("src", `${upload_image}`);
-    document.querySelector(".logo-img").style.visibility = "hidden";
-    document.querySelector(".btn-span").style.visibility = "hidden";
-    document.querySelector(".p-format").style.visibility = "hidden";
   });
 
   reader.readAsDataURL(this.files[0]);
