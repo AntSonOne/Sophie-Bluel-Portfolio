@@ -10,7 +10,13 @@ const URL = "http://localhost:5678/api";
 
 const MODALGALLERY = document.querySelector(".modal-gallery");
 
-/*********************** MODAL FORM VALIDATE BUTTON *******************/
+/*********************** MODAL FORM  *******************/
+
+const BACKARROW = document.querySelector(".back");
+
+const INPUTIMG = document.querySelector(".input-img");
+const TITLEINPUT = document.querySelector(".input-title");
+const CATEGORYSELECT = document.querySelector(".select-category");
 
 const VALIDATEBUTTON = document.querySelector(".validate");
 
@@ -195,7 +201,7 @@ if (TOKEN) {
 /*********************** GENERATE MODAL WORKS *******************/
 
 function genererWorksModal(works) {
-  document.querySelector(".back").style.visibility = "hidden";
+  BACKARROW.style.visibility = "hidden";
   ADDPICS.style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
   document.querySelector(".hr-gallery").style.display = null;
@@ -263,33 +269,28 @@ const displayGallery = () => {
   ADDPICS.style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
   document.querySelector(".hr-gallery").style.display = null;
-  document.querySelector(".back").style.visibility = "hidden";
+  BACKARROW.style.visibility = "hidden";
   VALIDATEBUTTON.style.display = "none";
   document.querySelector(".modal-form").style.display = "none";
 };
-const backBtn = document.querySelector(".back");
-backBtn.addEventListener("click", displayGallery);
+
+BACKARROW.addEventListener("click", displayGallery);
 
 ADDPICS.addEventListener("click", () => {
+  INPUTIMG.value = null;
+  TITLEINPUT.value = "";
+  CATEGORYSELECT.value = 0;
   MODALGALLERY.style.display = "none";
   ADDPICS.style.display = "none";
   document.querySelector(".hr-gallery").style.display = "none";
   document.querySelector(".delete-gallery").style.display = "none";
-  backBtn.style.visibility = null;
+  BACKARROW.style.visibility = null;
   document.querySelector(".gallery-title").innerText = "Ajout photo";
   document.querySelector(".modal-form").style.display = null;
   VALIDATEBUTTON.style.display = null;
 });
 
-const inputImage = document.querySelector(".input-img");
-inputImage.value = null;
-inputImage.addEventListener("change", uploadImg);
-
-const titleElement = document.querySelector(".input-title");
-titleElement.value = "";
-const categoryElement = document.querySelector(".select-category");
-categoryElement.value = 0;
-const inputs = [inputImage, titleElement, categoryElement];
+const inputs = [INPUTIMG, TITLEINPUT, CATEGORYSELECT];
 
 inputs.forEach((input) => {
   input.addEventListener("input", () => {
@@ -303,6 +304,7 @@ inputs.forEach((input) => {
 });
 
 // UPLOAD IMAGE IN INPUT FIELD
+INPUTIMG.addEventListener("change", uploadImg);
 
 function uploadImg() {
   let upload_image = "";
