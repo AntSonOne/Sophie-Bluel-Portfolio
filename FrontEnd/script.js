@@ -8,6 +8,8 @@ const URL = "http://localhost:5678/api";
 
 /*********************** MODAL GALLERY *******************/
 
+const HRGALLERY = (document.querySelector(".hr-gallery").style.display = null);
+
 const MODALGALLERY = document.querySelector(".modal-gallery");
 
 /*********************** MODAL FORM  *******************/
@@ -204,7 +206,7 @@ function genererWorksModal(works) {
   BACKARROW.style.visibility = "hidden";
   ADDPICS.style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
-  document.querySelector(".hr-gallery").style.display = null;
+  HRGALLERY.style.display = null;
   document.querySelector(".modal-form").style.display = "none";
   document.querySelector(".modal-gallery").style.display = null;
   document.querySelector(".gallery-title").innerText = "Galerie photo";
@@ -268,7 +270,7 @@ const displayGallery = () => {
   MODALGALLERY.style.display = null;
   ADDPICS.style.display = null;
   document.querySelector(".delete-gallery").style.display = null;
-  document.querySelector(".hr-gallery").style.display = null;
+  HRGALLERY.style.display = null;
   BACKARROW.style.visibility = "hidden";
   VALIDATEBUTTON.style.display = "none";
   document.querySelector(".modal-form").style.display = "none";
@@ -282,7 +284,7 @@ ADDPICS.addEventListener("click", () => {
   CATEGORYSELECT.value = 0;
   MODALGALLERY.style.display = "none";
   ADDPICS.style.display = "none";
-  document.querySelector(".hr-gallery").style.display = "none";
+  HRGALLERY.style.display = "none";
   document.querySelector(".delete-gallery").style.display = "none";
   BACKARROW.style.visibility = null;
   document.querySelector(".gallery-title").innerText = "Ajout photo";
