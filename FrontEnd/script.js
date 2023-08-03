@@ -8,7 +8,7 @@ const URL = "http://localhost:5678/api";
 
 /*********************** MODAL GALLERY *******************/
 
-const HRGALLERY = (document.querySelector(".hr-gallery").style.display = null);
+const HRGALLERY = document.querySelector(".hr-gallery");
 
 const MODALGALLERY = document.querySelector(".modal-gallery");
 
