@@ -294,8 +294,10 @@ INPUTS.forEach((input) => {
     const noEmptyInput = INPUTS.every((input) => input.value !== "");
     if (noEmptyInput) {
       VALIDATEBUTTON.style.backgroundColor = "#1D6154";
+      VALIDATEBUTTON.style.cursor = "pointer";
     } else {
       VALIDATEBUTTON.style.backgroundColor = "#BFBFBF";
+      VALIDATEBUTTON.style.cursor = "not-allowed";
     }
   });
 });
@@ -366,3 +368,21 @@ const addNewWork = () => {
 };
 
 VALIDATEBUTTON.addEventListener("click", addNewWork);
+
+let errorMessage = document.createElement("span");
+errorMessage.classList.add("alert");
+errorMessage.textContent = "Ce champ est requis";
+
+INPUTS.forEach((input) => {
+  input.addEventListener("focusout", function (e) {
+    const inputValue = e.target.value;
+    inputValue.trim();
+    if (inputValue === "") {
+      input.parentNode.insertBefore(errorMessage, input.nextSibling);
+      input.style.outline = "1px solid rgba(255, 0, 0, 0.9)";
+    } else {
+      errorMessage.remove();
+      input.style.outline = "none";
+    }
+  });
+});

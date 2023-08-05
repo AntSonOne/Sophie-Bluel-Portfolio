@@ -450,6 +450,7 @@ hr {
 }
 
 .custom-file-input{
+	cursor:pointer;
 	position: relative;
 	background: #E8F1F6;
 	width: 100%; 
@@ -489,6 +490,14 @@ hr {
 	height: 169px;
 	width: 129px;
 	margin: 0 auto;
+}
+
+.alert{
+	color: red;
+}
+
+.input-title, .select-category{
+	cursor: pointer;
 }
 
 @keyframes fadeIn {
