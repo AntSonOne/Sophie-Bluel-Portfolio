@@ -64,7 +64,6 @@ const genererWorks = (works) => {
 
   for (let i = 0; i < works.length; i++) {
     const article = works[i];
-    const sectionGallery = GALLERY;
     const workElement = document.createElement("figure");
     workElement.dataset.id = works[i].id;
     const imageElement = document.createElement("img");
@@ -72,7 +71,7 @@ const genererWorks = (works) => {
     const titleElement = document.createElement("figcaption");
     titleElement.innerText = article.title;
 
-    sectionGallery.appendChild(workElement);
+    GALLERY.appendChild(workElement);
     workElement.appendChild(imageElement);
     workElement.appendChild(titleElement);
   }
